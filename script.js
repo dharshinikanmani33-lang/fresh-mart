@@ -1,25 +1,64 @@
 /* ============================================================
-   FreshMart – script.js  (Zero-Broken-Image Edition)
-   All images use placehold.co which is 100% reliable.
-   Plus a global fallback system that catches ANY failure.
+   FreshMart – script.js  (100% Local Images Edition)
+   Every image uses LOCAL files from assets/images/
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
 
     // ═══════════════════════════════════════════════════════
-    // GLOBAL IMAGE FALLBACK SYSTEM
-    // Catches ANY image load failure anywhere on the page
-    // and replaces it with a branded placeholder.
+    // GLOBAL IMAGE FALLBACK — catches ANY broken image
     // ═══════════════════════════════════════════════════════
     document.addEventListener('error', function(e) {
-        if (e.target.tagName === 'IMG' && !e.target.dataset.fallbackApplied) {
-            e.target.dataset.fallbackApplied = 'true';
-            const alt = e.target.alt || 'FreshMart';
-            const text = encodeURIComponent(alt);
-            e.target.src = `https://placehold.co/400x300/2E7D32/FFF?text=${text}`;
+        if (e.target.tagName === 'IMG' && !e.target.dataset.fb) {
+            e.target.dataset.fb = '1';
+            // Use a local fallback — the store interior
+            e.target.src = 'assets/images/hero_banner.png';
         }
     }, true);
 
-    // ─── SCROLL ANIMATIONS ───
+    // ─── LANGUAGE TOGGLE (Premium Custom Dropdown) ───
+    let currentLang = 'en';
+    const applyTranslations = (lang) => {
+        try {
+            if (typeof translations === 'undefined') return;
+            const dict = translations[lang] || translations['en'] || {};
+            document.querySelectorAll('[data-i18n-key]').forEach(el => {
+                const key = el.getAttribute('data-i18n-key');
+                if (dict[key]) {
+                    if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+                        el.placeholder = dict[key];
+                    } else {
+                        el.textContent = dict[key];
+                    }
+                }
+            });
+        } catch (err) {
+            console.warn('Translation error (non-fatal):', err);
+        }
+    };
+
+    // Custom dropdown toggle
+    const langToggleBtn = document.getElementById('langToggle');
+    const langMenu = document.getElementById('langMenu');
+    if (langToggleBtn && langMenu) {
+        langToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('open');
+        });
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                currentLang = opt.dataset.lang;
+                const label = opt.textContent;
+                langToggleBtn.textContent = '🌐 ' + label + ' ▼';
+                langToggleBtn.dataset.lang = currentLang;
+                applyTranslations(currentLang);
+                langMenu.classList.remove('open');
+            });
+        });
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', () => langMenu.classList.remove('open'));
+    }
+
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.12 });
@@ -67,331 +106,317 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllModals(); });
 
     // ═══════════════════════════════════════════════════════
-    // HELPER: Generate placehold.co URL (never fails)
+    // LOCAL IMAGE PATHS — All local, all guaranteed to load
     // ═══════════════════════════════════════════════════════
-    const img = (w, h, bg, fg, text) => `https://placehold.co/${w}x${h}/${bg}/${fg}?text=${encodeURIComponent(text)}`;
+    const I = {
+        fruits: 'assets/images/fruits.png',
+        veg: 'assets/images/vegetables.png',
+        grocery: 'assets/images/grocery.png',
+        rice: 'assets/images/rice_grains.png',
+        dairy: 'assets/images/dairy.png',
+        bakery: 'assets/images/bakery.png',
+        snacks: 'assets/images/snacks.png',
+        frozen: 'assets/images/frozen_foods.png',
+        personal: 'assets/images/personal_care.png',
+        baby: 'assets/images/baby_care.png',
+        household: 'assets/images/household.png',
+        kitchen: 'assets/images/kitchen.png',
+        stationery: 'assets/images/stationery.png',
+        petcare: 'assets/images/pet_care.png',
+        store: 'assets/images/store_interior.png',
+        hero: 'assets/images/hero_banner.png',
+        about: 'assets/images/about_store.png',
+        tata_dal: 'assets/images/tata_dal.png',
+        india_gate: 'assets/images/india_gate_rice.png',
+        marie: 'assets/images/marie_gold.png',
+        surf: 'assets/images/surf_excel.png'
+    };
 
     // ═══════════════════════════════════════════════════════
-    // DEPARTMENT DATA — Every product has a unique image
+    // DEPARTMENT DATA — All use local images
     // ═══════════════════════════════════════════════════════
     const deptData = {
         fruits: {
             title: 'Fresh Fruits',
             desc: 'We source the finest farm-fresh seasonal and exotic fruits every morning. Quality-checked and handpicked for your family\'s health.',
-            banner: img(880, 300, '2E7D32', 'FFF', '🍎 Fresh Fruits Department'),
+            banner: I.fruits,
             brands: ['Fresh Farm', 'Del Monte', 'Naturelle'],
             products: [
-                { name: 'Kashmir Apples', img: img(300, 200, 'C62828', 'FFF', '🍎 Apples'), desc: 'Crisp & sweet' },
-                { name: 'Robusta Bananas', img: img(300, 200, 'F9A825', 'FFF', '🍌 Bananas'), desc: 'Ripe & nutritious' },
-                { name: 'Alphonso Mangoes', img: img(300, 200, 'E65100', 'FFF', '🥭 Mangoes'), desc: 'King of fruits' },
-                { name: 'Nagpur Oranges', img: img(300, 200, 'EF6C00', 'FFF', '🍊 Oranges'), desc: 'Vitamin C rich' },
-                { name: 'Black Grapes', img: img(300, 200, '4A148C', 'FFF', '🍇 Grapes'), desc: 'Juicy & fresh' },
-                { name: 'Pomegranates', img: img(300, 200, 'B71C1C', 'FFF', '🫐 Pomegranate'), desc: 'Antioxidant rich' },
-                { name: 'Watermelon', img: img(300, 200, '388E3C', 'FFF', '🍉 Watermelon'), desc: 'Summer favourite' },
-                { name: 'Pineapple', img: img(300, 200, 'F57F17', 'FFF', '🍍 Pineapple'), desc: 'Tropical & sweet' }
+                { name: 'Kashmir Apples', img: I.fruits, desc: 'Crisp & sweet Himalayan apples' },
+                { name: 'Robusta Bananas', img: I.fruits, desc: 'Ripe & nutritious bananas' },
+                { name: 'Alphonso Mangoes', img: I.fruits, desc: 'King of fruits — premium quality' },
+                { name: 'Nagpur Oranges', img: I.fruits, desc: 'Vitamin C rich juicy oranges' },
+                { name: 'Black Grapes', img: I.fruits, desc: 'Juicy & fresh seedless grapes' },
+                { name: 'Pomegranates', img: I.fruits, desc: 'Antioxidant rich ruby gems' },
+                { name: 'Watermelon', img: I.fruits, desc: 'Summer favourite — chilled' },
+                { name: 'Fresh Pineapple', img: I.fruits, desc: 'Tropical & sweet whole pineapple' }
             ]
         },
         vegetables: {
             title: 'Fresh Vegetables',
             desc: 'Crisp, nutritious vegetables sourced directly from local farms every morning. Maximum freshness, guaranteed.',
-            banner: img(880, 300, '388E3C', 'FFF', '🥕 Fresh Vegetables Department'),
+            banner: I.veg,
             brands: ['Local Farm', 'Green Valley', 'Organic India'],
             products: [
-                { name: 'Farm Tomatoes', img: img(300, 200, 'D32F2F', 'FFF', '🍅 Tomatoes'), desc: 'Firm & red' },
-                { name: 'Fresh Onions', img: img(300, 200, '6D4C41', 'FFF', '🧅 Onions'), desc: 'Sharp & flavorful' },
-                { name: 'Potatoes', img: img(300, 200, '795548', 'FFF', '🥔 Potatoes'), desc: 'All varieties' },
-                { name: 'Ooty Carrots', img: img(300, 200, 'E65100', 'FFF', '🥕 Carrots'), desc: 'Sweet & crunchy' },
-                { name: 'Fresh Beans', img: img(300, 200, '2E7D32', 'FFF', '🫘 Beans'), desc: 'Tender & green' },
-                { name: 'Brinjal', img: img(300, 200, '4A148C', 'FFF', '🍆 Brinjal'), desc: 'Purple & firm' },
-                { name: 'Cabbage', img: img(300, 200, '558B2F', 'FFF', '🥬 Cabbage'), desc: 'Crisp leaves' },
-                { name: 'Cauliflower', img: img(300, 200, 'F5F5F5', '333', '🥦 Cauliflower'), desc: 'White & fresh' }
+                { name: 'Farm Tomatoes', img: I.veg, desc: 'Firm & red vine-ripened' },
+                { name: 'Fresh Onions', img: I.veg, desc: 'Sharp & flavorful all types' },
+                { name: 'Potatoes', img: I.veg, desc: 'All varieties — clean & sorted' },
+                { name: 'Ooty Carrots', img: I.veg, desc: 'Sweet & crunchy hill carrots' },
+                { name: 'Fresh Beans', img: I.veg, desc: 'Tender & green hand-picked' },
+                { name: 'Brinjal', img: I.veg, desc: 'Purple & firm for curries' },
+                { name: 'Cabbage', img: I.veg, desc: 'Crisp fresh green leaves' },
+                { name: 'Cauliflower', img: I.veg, desc: 'White & fresh — farm quality' }
             ]
         },
         grocery: {
             title: 'Grocery & Staples',
             desc: 'Premium quality everyday cooking essentials. From aromatic spices to pure cooking oils.',
-            banner: img(880, 300, 'E65100', 'FFF', '🛒 Grocery & Staples'),
+            banner: I.grocery,
             brands: ['Aashirvaad', 'Tata', 'Fortune', 'MDH'],
             products: [
-                { name: 'Basmati Rice', img: img(300, 200, 'EFEBE9', '5D4037', '🌾 Rice'), desc: 'Long grain premium' },
-                { name: 'Toor Dal', img: img(300, 200, 'F9A825', '5D4037', '🫘 Dal'), desc: 'Protein-rich pulses' },
-                { name: 'Wheat Flour', img: img(300, 200, 'D7CCC8', '5D4037', '🌾 Wheat Flour'), desc: 'Fresh ground atta' },
-                { name: 'Sugar', img: img(300, 200, 'FAFAFA', '333', '🍬 Sugar'), desc: 'Pure white sugar' },
-                { name: 'Spice Mix', img: img(300, 200, 'BF360C', 'FFF', '🌶️ Spices'), desc: 'Aromatic blends' },
-                { name: 'Cooking Oil', img: img(300, 200, 'FFF176', '5D4037', '🫗 Cooking Oil'), desc: 'Sunflower & groundnut' }
+                { name: 'Basmati Rice', img: I.india_gate, desc: 'Long grain premium basmati' },
+                { name: 'Toor Dal', img: I.tata_dal, desc: 'Protein-rich unpolished pulses' },
+                { name: 'Wheat Flour', img: I.grocery, desc: 'Fresh ground whole wheat atta' },
+                { name: 'Sugar', img: I.grocery, desc: 'Pure white refined sugar' },
+                { name: 'Spice Mix', img: I.grocery, desc: 'Aromatic masala blends' },
+                { name: 'Cooking Oil', img: I.grocery, desc: 'Sunflower & groundnut oils' }
             ]
         },
         rice: {
             title: 'Rice & Grains',
             desc: 'A wide selection of premium rice varieties, lentils, and whole grains for every cooking style.',
-            banner: img(880, 300, '5D4037', 'FFF', '🌾 Rice & Grains'),
+            banner: I.rice,
             brands: ['India Gate', 'Tata Sampann', 'Aashirvaad'],
             products: [
-                { name: 'India Gate Rice', img: img(300, 200, '4E342E', 'FFF', '🌾 India Gate Rice'), desc: 'Premium basmati' },
-                { name: 'Raw Rice (Ponni)', img: img(300, 200, 'EFEBE9', '5D4037', '🍚 Raw Rice'), desc: 'Ponni & Sona Masoori' },
-                { name: 'Toor Dal', img: img(300, 200, 'F9A825', '5D4037', '🫘 Toor Dal'), desc: 'Unpolished dal' },
-                { name: 'Moong Dal', img: img(300, 200, '9E9D24', 'FFF', '🫛 Moong Dal'), desc: 'Yellow & green' }
+                { name: 'India Gate Basmati', img: I.india_gate, desc: 'Premium extra-long grain rice' },
+                { name: 'Raw Rice (Ponni)', img: I.rice, desc: 'Ponni & Sona Masoori varieties' },
+                { name: 'Toor Dal', img: I.tata_dal, desc: 'Unpolished protein-rich dal' },
+                { name: 'Moong Dal', img: I.rice, desc: 'Yellow & green moong varieties' }
             ]
         },
         dairy: {
             title: 'Dairy Products',
             desc: 'Always fresh. Stored at optimal temperature. Our dairy section is stocked daily.',
-            banner: img(880, 300, '1565C0', 'FFF', '🥛 Dairy Products'),
+            banner: I.dairy,
             brands: ['Amul', 'Aavin', 'Milky Mist', 'Nestlé'],
             products: [
-                { name: 'Fresh Cow Milk', img: img(300, 200, 'E3F2FD', '1565C0', '🥛 Milk'), desc: 'Full-cream & toned' },
-                { name: 'Salted Butter', img: img(300, 200, 'FFF9C4', 'F57F17', '🧈 Butter'), desc: 'Rich & creamy' },
-                { name: 'Cheddar Cheese', img: img(300, 200, 'FFF59D', 'E65100', '🧀 Cheese'), desc: 'Slices & blocks' },
-                { name: 'Fresh Paneer', img: img(300, 200, 'FFFDE7', '5D4037', '🧈 Paneer'), desc: 'Soft & fresh daily' },
-                { name: 'Curd', img: img(300, 200, 'F1F8E9', '33691E', '🥛 Curd'), desc: 'Thick & creamy' }
+                { name: 'Fresh Cow Milk', img: I.dairy, desc: 'Full-cream & toned — daily fresh' },
+                { name: 'Salted Butter', img: I.dairy, desc: 'Rich & creamy Amul butter' },
+                { name: 'Cheddar Cheese', img: I.dairy, desc: 'Slices & blocks for sandwiches' },
+                { name: 'Fresh Paneer', img: I.dairy, desc: 'Soft & fresh — made daily' },
+                { name: 'Curd', img: I.dairy, desc: 'Thick, creamy homestyle curd' }
             ]
         },
         bakery: {
             title: 'Bakery',
             desc: 'Freshly baked breads, cakes, and pastries prepared daily.',
-            banner: img(880, 300, 'BF360C', 'FFF', '🍞 Bakery'),
+            banner: I.bakery,
             brands: ['Britannia', 'Modern Bakeries', 'Local Bakery'],
             products: [
-                { name: 'Sandwich Bread', img: img(300, 200, 'EFEBE9', '5D4037', '🍞 Bread'), desc: 'White & whole wheat' },
-                { name: 'Cream Cakes', img: img(300, 200, 'FCE4EC', 'C62828', '🎂 Cakes'), desc: 'Birthday & celebration' },
-                { name: 'Assorted Cookies', img: img(300, 200, 'FFF3E0', 'E65100', '🍪 Cookies'), desc: 'Chocolate & vanilla' },
-                { name: 'Fresh Buns', img: img(300, 200, 'FFF8E1', '5D4037', '🥐 Buns'), desc: 'Soft dinner rolls' }
+                { name: 'Sandwich Bread', img: I.bakery, desc: 'White & whole wheat loaves' },
+                { name: 'Cream Cakes', img: I.bakery, desc: 'Birthday & celebration cakes' },
+                { name: 'Assorted Cookies', img: I.marie, desc: 'Chocolate, vanilla & butter' },
+                { name: 'Fresh Buns', img: I.bakery, desc: 'Soft dinner rolls — baked daily' }
             ]
         },
         snacks: {
             title: 'Snacks & Beverages',
             desc: 'Your favourite chips, biscuits, soft drinks, juices and health drinks.',
-            banner: img(880, 300, '7B1FA2', 'FFF', '🍪 Snacks & Beverages'),
+            banner: I.snacks,
             brands: ['Parle', 'Britannia', 'Sunfeast', 'PepsiCo', 'Coca-Cola'],
             products: [
-                { name: 'Potato Chips', img: img(300, 200, 'FFF176', '5D4037', '🍟 Chips'), desc: 'Salted & flavoured' },
-                { name: 'Marie Biscuits', img: img(300, 200, 'EFEBE9', '795548', '🍪 Biscuits'), desc: 'Classic tea-time' },
-                { name: 'Soft Drinks', img: img(300, 200, 'B71C1C', 'FFF', '🥤 Soft Drinks'), desc: 'Cola, Sprite, Fanta' },
-                { name: 'Fruit Juices', img: img(300, 200, 'FF8F00', 'FFF', '🧃 Juices'), desc: 'Real fruit juices' }
+                { name: 'Potato Chips', img: I.snacks, desc: 'Salted, masala & cream flavours' },
+                { name: 'Marie Biscuits', img: I.marie, desc: 'Classic tea-time favourites' },
+                { name: 'Soft Drinks', img: I.snacks, desc: 'Cola, Sprite, Fanta & more' },
+                { name: 'Fruit Juices', img: I.snacks, desc: 'Real fruit juices all flavours' }
             ]
         },
         frozen: {
             title: 'Frozen Foods',
             desc: 'Premium frozen vegetables, ready-to-eat meals, and frozen treats.',
-            banner: img(880, 300, '00838F', 'FFF', '❄️ Frozen Foods'),
+            banner: I.frozen,
             brands: ['McCain', 'ITC', 'Mother\'s Recipe'],
             products: [
-                { name: 'Frozen Peas', img: img(300, 200, 'B2DFDB', '00695C', '🟢 Frozen Peas'), desc: 'Garden fresh frozen' },
-                { name: 'Ice Cream', img: img(300, 200, 'FCE4EC', 'AD1457', '🍦 Ice Cream'), desc: 'All flavours' }
+                { name: 'Frozen Peas', img: I.frozen, desc: 'Garden fresh flash-frozen' },
+                { name: 'Ice Cream', img: I.frozen, desc: 'All flavours — Amul, Kwality' }
             ]
         },
         personal: {
             title: 'Personal Care',
             desc: 'From soaps and shampoos to skincare and dental hygiene.',
-            banner: img(880, 300, 'AD1457', 'FFF', '🧴 Personal Care'),
+            banner: I.personal,
             brands: ['Dove', 'Colgate', 'Himalaya', 'Pears'],
             products: [
-                { name: 'Soap', img: img(300, 200, 'F3E5F5', '6A1B9A', '🧼 Soap'), desc: 'Dove, Pears & more' },
-                { name: 'Shampoo', img: img(300, 200, 'E1F5FE', '0277BD', '🧴 Shampoo'), desc: 'All hair types' },
-                { name: 'Toothpaste', img: img(300, 200, 'E8F5E9', '2E7D32', '🪥 Toothpaste'), desc: 'Colgate & others' }
+                { name: 'Soap', img: I.personal, desc: 'Dove, Pears, Lux & more' },
+                { name: 'Shampoo', img: I.personal, desc: 'Head & Shoulders, Dove & more' },
+                { name: 'Toothpaste', img: I.personal, desc: 'Colgate, Pepsodent & more' }
             ]
         },
         baby: {
             title: 'Baby Care',
             desc: 'Everything your little one needs — diapers, baby food, gentle skincare.',
-            banner: img(880, 300, 'E91E63', 'FFF', '👶 Baby Care'),
+            banner: I.baby,
             brands: ['Pampers', 'Himalaya Baby', 'Johnson\'s'],
             products: [
-                { name: 'Baby Diapers', img: img(300, 200, 'FCE4EC', 'C2185B', '🩱 Diapers'), desc: 'All sizes available' },
-                { name: 'Baby Food', img: img(300, 200, 'FFF8E1', 'E65100', '🍼 Baby Food'), desc: 'Cerelac & more' }
+                { name: 'Baby Diapers', img: I.baby, desc: 'Pampers — all sizes in stock' },
+                { name: 'Baby Food', img: I.baby, desc: 'Cerelac, Nestum & more' }
             ]
         },
         household: {
             title: 'Household Essentials',
             desc: 'Storage, cleaning tools and everyday home utilities.',
-            banner: img(880, 300, '455A64', 'FFF', '🏠 Household Essentials'),
+            banner: I.household,
             brands: ['Tupperware', 'Prestige', 'Cello'],
             products: [
-                { name: 'Storage Containers', img: img(300, 200, 'ECEFF1', '37474F', '📦 Containers'), desc: 'Airtight & durable' },
-                { name: 'Brooms & Mops', img: img(300, 200, 'EFEBE9', '5D4037', '🧹 Brooms'), desc: 'Full cleaning set' }
+                { name: 'Storage Containers', img: I.household, desc: 'Airtight & durable all sizes' },
+                { name: 'Brooms & Mops', img: I.household, desc: 'Full cleaning set for home' }
             ]
         },
         cleaning: {
             title: 'Cleaning Products',
             desc: 'Detergents, floor cleaners, dishwash liquids and more.',
-            banner: img(880, 300, '1976D2', 'FFF', '🧹 Cleaning Products'),
+            banner: I.household,
             brands: ['Surf Excel', 'Vim', 'Lizol', 'Harpic'],
             products: [
-                { name: 'Detergents', img: img(300, 200, 'E3F2FD', '0D47A1', '🧺 Detergents'), desc: 'Matic & bar' },
-                { name: 'Floor Cleaners', img: img(300, 200, 'E8F5E9', '2E7D32', '🧴 Floor Cleaner'), desc: 'Lizol & Domex' },
-                { name: 'Dishwash Liquid', img: img(300, 200, 'F1F8E9', '558B2F', '🍽️ Dishwash'), desc: 'Vim liquid & bar' }
+                { name: 'Surf Excel', img: I.surf, desc: 'Matic liquid & washing bar' },
+                { name: 'Floor Cleaners', img: I.household, desc: 'Lizol & Domex all variants' },
+                { name: 'Dishwash', img: I.household, desc: 'Vim liquid, gel & bar' }
             ]
         },
         kitchen: {
             title: 'Kitchen Essentials',
             desc: 'Pots, pans, cutlery, and every kitchen utensil you need.',
-            banner: img(880, 300, 'E65100', 'FFF', '🍳 Kitchen Essentials'),
+            banner: I.kitchen,
             brands: ['Prestige', 'Hawkins', 'Pigeon'],
             products: [
-                { name: 'Pressure Cooker', img: img(300, 200, 'ECEFF1', '37474F', '♨️ Cooker'), desc: 'Prestige & Hawkins' },
-                { name: 'Non-stick Pan', img: img(300, 200, '37474F', 'FFF', '🍳 Pan'), desc: 'All sizes' }
+                { name: 'Pressure Cooker', img: I.kitchen, desc: 'Prestige & Hawkins cookers' },
+                { name: 'Non-stick Pan', img: I.kitchen, desc: 'All sizes — dosa tava too' }
             ]
         },
         stationery: {
             title: 'Stationery',
             desc: 'Pens, notebooks, files and school supplies.',
-            banner: img(880, 300, '3949AB', 'FFF', '✏️ Stationery'),
+            banner: I.stationery,
             brands: ['Reynolds', 'Camlin', 'Classmate'],
             products: [
-                { name: 'Notebooks', img: img(300, 200, 'E8EAF6', '283593', '📓 Notebooks'), desc: 'Ruled & blank' },
-                { name: 'Ball Pens', img: img(300, 200, 'E3F2FD', '0D47A1', '🖊️ Pens'), desc: 'All colours' }
+                { name: 'Notebooks', img: I.stationery, desc: 'Ruled, blank & graph books' },
+                { name: 'Ball Pens', img: I.stationery, desc: 'Reynolds, Parker & Cello' }
             ]
         },
         petcare: {
             title: 'Pet Care Products',
             desc: 'Everything your pets love — food, grooming essentials, accessories.',
-            banner: img(880, 300, '6D4C41', 'FFF', '🐾 Pet Care'),
+            banner: I.petcare,
             brands: ['Pedigree', 'Royal Canin', 'Whiskas'],
             products: [
-                { name: 'Dog Food', img: img(300, 200, 'EFEBE9', '5D4037', '🐕 Dog Food'), desc: 'Pedigree & Royal Canin' },
-                { name: 'Cat Food', img: img(300, 200, 'FFF3E0', 'E65100', '🐈 Cat Food'), desc: 'Whiskas & more' }
+                { name: 'Dog Food', img: I.petcare, desc: 'Pedigree & Royal Canin bags' },
+                { name: 'Cat Food', img: I.petcare, desc: 'Whiskas wet & dry food' }
             ]
         }
     };
 
     // ═══════════════════════════════════════════════════════
-    // BRAND DATA — Every brand has unique product images
+    // BRAND DATA — All use local images
     // ═══════════════════════════════════════════════════════
     const brandData = {
         amul: {
             title: 'Amul', color: 'linear-gradient(135deg,#1565C0,#1E88E5)',
             desc: 'The Taste of India. Amul is India\'s largest dairy brand, trusted by millions of families for over 75 years.',
             products: [
-                { name: 'Amul Taaza Milk', img: img(300, 200, 'E3F2FD', '1565C0', '🥛 Amul Milk'), desc: 'Fresh full-cream milk, 1L & 500ml.' },
-                { name: 'Amul Butter', img: img(300, 200, 'FFF9C4', 'F57F17', '🧈 Amul Butter'), desc: 'Salted & unsalted, 100g–500g.' },
-                { name: 'Amul Cheese', img: img(300, 200, 'FFF59D', 'E65100', '🧀 Amul Cheese'), desc: 'Slices & blocks for sandwiches.' },
-                { name: 'Amul Paneer', img: img(300, 200, 'FFFDE7', '5D4037', '🧈 Amul Paneer'), desc: 'Soft, fresh — 200g & 500g.' },
-                { name: 'Amul Ice Cream', img: img(300, 200, 'FCE4EC', 'AD1457', '🍦 Amul Ice Cream'), desc: 'All flavours available.' }
+                { name: 'Amul Taaza Milk', img: I.dairy, desc: 'Fresh full-cream milk, 1L & 500ml packs.' },
+                { name: 'Amul Butter', img: I.dairy, desc: 'Salted & unsalted butter, 100g–500g.' },
+                { name: 'Amul Cheese', img: I.dairy, desc: 'Ready-to-use cheese slices & blocks.' },
+                { name: 'Amul Paneer', img: I.dairy, desc: 'Soft, fresh paneer — 200g & 500g.' },
+                { name: 'Amul Ice Cream', img: I.frozen, desc: 'Vanilla, chocolate and fruity flavours.' }
             ]
         },
         tata: {
             title: 'Tata Sampann', color: 'linear-gradient(135deg,#B71C1C,#E53935)',
             desc: 'Tata Sampann brings authentic Indian flavours through premium quality pulses, spices, and staples.',
             products: [
-                { name: 'Tata Toor Dal', img: img(300, 200, 'FFF3E0', 'BF360C', '🫘 Tata Dal'), desc: 'Unpolished toor dal, rich in protein.' },
-                { name: 'Tata Turmeric', img: img(300, 200, 'FFF9C4', 'F57F17', '🌿 Turmeric'), desc: 'Bright yellow, aromatic.' },
-                { name: 'Tata Chilli Powder', img: img(300, 200, 'FFCDD2', 'B71C1C', '🌶️ Chilli Powder'), desc: 'Vibrant colour & heat.' }
+                { name: 'Tata Toor Dal', img: I.tata_dal, desc: 'Unpolished toor dal, rich in protein.' },
+                { name: 'Tata Turmeric', img: I.grocery, desc: 'Bright yellow, aromatic turmeric powder.' },
+                { name: 'Tata Chilli Powder', img: I.grocery, desc: 'Vibrant colour, authentic Indian heat.' }
             ]
         },
         aashirvaad: {
             title: 'Aashirvaad', color: 'linear-gradient(135deg,#E65100,#FB8C00)',
             desc: 'Aashirvaad by ITC is India\'s leading flour brand, delivering freshness and nutrition.',
             products: [
-                { name: 'Aashirvaad Atta', img: img(300, 200, 'FFF3E0', 'E65100', '🌾 Atta 5kg'), desc: 'Premium whole wheat flour.' },
-                { name: 'Aashirvaad Spices', img: img(300, 200, 'FBE9E7', 'BF360C', '🌶️ Spices'), desc: 'Authentic masala blends.' }
+                { name: 'Aashirvaad Atta', img: I.grocery, desc: 'Premium whole wheat flour, 5kg & 10kg.' },
+                { name: 'Aashirvaad Spices', img: I.grocery, desc: 'Authentic masala blends — all varieties.' }
             ]
         },
         britannia: {
             title: 'Britannia', color: 'linear-gradient(135deg,#2E7D32,#4CAF50)',
             desc: 'India\'s most loved food company, bringing joy with baked goods since 1892.',
             products: [
-                { name: 'Good Day Biscuits', img: img(300, 200, 'FFF8E1', 'E65100', '🍪 Good Day'), desc: 'Cashew & butter cookies.' },
-                { name: 'Marie Gold', img: img(300, 200, 'EFEBE9', '795548', '🍪 Marie Gold'), desc: 'Classic tea-time biscuits.' },
-                { name: 'Britannia Bread', img: img(300, 200, 'FFF3E0', '5D4037', '🍞 Bread'), desc: 'White & brown bread loaves.' }
+                { name: 'Good Day Biscuits', img: I.marie, desc: 'Cashew & butter flavour cookies.' },
+                { name: 'Marie Gold', img: I.marie, desc: 'Classic tea-time light biscuits.' },
+                { name: 'Britannia Bread', img: I.bakery, desc: 'White & brown bread loaves — daily fresh.' }
             ]
         },
         parle: {
             title: 'Parle', color: 'linear-gradient(135deg,#4A148C,#7B1FA2)',
             desc: 'India\'s most iconic biscuit brand, famous for Parle-G since 1938.',
             products: [
-                { name: 'Parle-G', img: img(300, 200, 'FFF9C4', '5D4037', '🍪 Parle-G'), desc: 'World\'s #1 selling biscuit.' },
-                { name: '20-20 Cookies', img: img(300, 200, 'EFEBE9', '795548', '🍪 20-20 Cookies'), desc: 'Crunchy cashew cookies.' }
+                { name: 'Parle-G', img: I.marie, desc: 'World\'s #1 selling glucose biscuit.' },
+                { name: '20-20 Cookies', img: I.snacks, desc: 'Crunchy cashew & butter cookies.' }
             ]
         },
         sunfeast: {
             title: 'Sunfeast', color: 'linear-gradient(135deg,#F57F17,#FFB300)',
             desc: 'Sunfeast by ITC — a premium biscuits and cakes brand for every age group.',
             products: [
-                { name: 'Dark Fantasy', img: img(300, 200, '3E2723', 'FFF', '🍫 Dark Fantasy'), desc: 'Choco-filled indulgence.' },
-                { name: 'Mom\'s Magic', img: img(300, 200, 'FFF8E1', 'E65100', '🍪 Mom\'s Magic'), desc: 'Butter-rich biscuits.' }
+                { name: 'Dark Fantasy', img: I.snacks, desc: 'Rich choco-filled cookie indulgence.' },
+                { name: 'Mom\'s Magic', img: I.marie, desc: 'Butter-rich homestyle biscuits.' }
             ]
         },
         aavin: {
             title: 'Aavin', color: 'linear-gradient(135deg,#006064,#00ACC1)',
-            desc: 'Tamil Nadu Co-operative Milk Producers\' Federation — the most trusted dairy in TN.',
+            desc: 'Tamil Nadu Co-operative Milk Federation — TN\'s most trusted dairy brand.',
             products: [
-                { name: 'Aavin Milk', img: img(300, 200, 'E0F7FA', '006064', '🥛 Aavin Milk'), desc: 'Full cream, toned, slim.' },
-                { name: 'Aavin Curd', img: img(300, 200, 'F1F8E9', '33691E', '🥛 Aavin Curd'), desc: 'Thick, creamy curd.' },
-                { name: 'Aavin Butter', img: img(300, 200, 'FFF9C4', 'F57F17', '🧈 Aavin Butter'), desc: 'Fresh table butter.' }
+                { name: 'Aavin Milk', img: I.dairy, desc: 'Full cream, toned, & double toned.' },
+                { name: 'Aavin Curd', img: I.dairy, desc: 'Thick, creamy set curd — daily.' },
+                { name: 'Aavin Butter', img: I.dairy, desc: 'Fresh table butter — salted.' }
             ]
         },
         horlicks: {
             title: 'Horlicks', color: 'linear-gradient(135deg,#33691E,#8BC34A)',
-            desc: 'A scientifically formulated health drink for stronger bones and immunity.',
+            desc: 'Scientifically formulated health drink for stronger bones and immunity.',
             products: [
-                { name: 'Horlicks Original', img: img(300, 200, 'F1F8E9', '33691E', '🥤 Horlicks'), desc: 'Classic malt drink, 500g.' },
-                { name: 'Junior Horlicks', img: img(300, 200, 'FFF8E1', 'E65100', '🧒 Junior'), desc: 'Formulated for children.' }
+                { name: 'Horlicks Original', img: I.snacks, desc: 'Classic malt health drink, 500g jar.' },
+                { name: 'Junior Horlicks', img: I.baby, desc: 'Specially formulated for growing children.' }
             ]
         },
         surfexcel: {
             title: 'Surf Excel', color: 'linear-gradient(135deg,#0D47A1,#1976D2)',
-            desc: 'India\'s number one laundry detergent for decades. Daag Ache Hain!',
+            desc: 'India\'s #1 laundry detergent for decades. Daag Ache Hain!',
             products: [
-                { name: 'Surf Excel Matic', img: img(300, 200, 'E3F2FD', '0D47A1', '🧺 Matic Liquid'), desc: 'Liquid for front-load machines.' },
-                { name: 'Surf Excel Bar', img: img(300, 200, 'BBDEFB', '1565C0', '🧼 Surf Bar'), desc: 'Bar for tough stains.' }
+                { name: 'Surf Excel Matic', img: I.surf, desc: 'Liquid detergent for front & top load.' },
+                { name: 'Surf Excel Bar', img: I.surf, desc: 'Washing bar for tough stains.' }
             ]
         },
         vim: {
             title: 'Vim', color: 'linear-gradient(135deg,#558B2F,#8BC34A)',
-            desc: 'India\'s most trusted dishwashing brand, cutting through grease effectively.',
+            desc: 'India\'s most trusted dishwashing brand — cuts through grease effectively.',
             products: [
-                { name: 'Vim Liquid', img: img(300, 200, 'F1F8E9', '558B2F', '🍽️ Vim Liquid'), desc: 'Anti-bacterial, 500ml.' },
-                { name: 'Vim Bar', img: img(300, 200, 'DCEDC8', '33691E', '🧼 Vim Bar'), desc: 'Classic lime bar.' }
+                { name: 'Vim Liquid', img: I.household, desc: 'Anti-bacterial formula, 500ml & 750ml.' },
+                { name: 'Vim Bar', img: I.household, desc: 'Classic lime bar for sparkling utensils.' }
             ]
         }
     };
 
     // ═══════════════════════════════════════════════════════
-    // OFFER DATA
+    // OFFER DATA — No images needed, CSS gradients only
     // ═══════════════════════════════════════════════════════
     const offerData = {
-        weekend: {
-            title: 'Weekend Savings Festival', badge: 'SAT & SUN ONLY',
-            bg: 'linear-gradient(135deg,#FF8F00,#FFB300)',
-            desc: 'Make your weekends extra special! Enjoy massive discounts on fresh produce, dairy, and household essentials.',
-            highlights: ['Up to 20% off Fresh Fruits & Vegetables', 'Buy 2 Get 1 Free on Dairy Products', 'Special discounts on Bakery Items', '10% off on all Cleaning Products'],
-            validity: 'Every Saturday & Sunday'
-        },
-        festival: {
-            title: 'Grand Festival Offers', badge: 'FESTIVE SEASON',
-            bg: 'linear-gradient(135deg,#C62828,#E53935)',
-            desc: 'Celebrate the festive season with big savings on sweets, grocery bundles, and gift hampers.',
-            highlights: ['Exclusive Festival Gift Hampers', 'Discounts on Mithai and sweets', '15% off on bulk grocery purchases', 'Combo offers on packaged foods'],
-            validity: 'During all major festive seasons'
-        },
-        monthly: {
-            title: 'Monthly Mega Deals', badge: 'EVERY MONTH',
-            bg: 'linear-gradient(135deg,#1565C0,#42A5F5)',
-            desc: 'Stock up for the entire month at unbeatable prices.',
-            highlights: ['Up to 30% off on bulk staples', 'Special prices on branded rice & dal', 'Discounted household bundles', 'Monthly loyalty bonus points'],
-            validity: 'First week of every month'
-        },
-        family: {
-            title: 'Family Combo Promotions', badge: 'FAMILY PACKS',
-            bg: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
-            desc: 'Save big on family-sized packs and enjoy significant grocery savings.',
-            highlights: ['Family pack combos across categories', 'Cereal + Milk combo at special price', 'Household bundle deals', 'Extra 5% off with loyalty card'],
-            validity: 'All month long'
-        },
-        summer: {
-            title: 'Summer Savings', badge: 'SUMMER SPECIAL',
-            bg: 'linear-gradient(135deg,#00838F,#26C6DA)',
-            desc: 'Beat the Chennai heat with cool deals on beverages, juices, and frozen foods.',
-            highlights: ['Up to 25% off on all beverages', 'Special prices on Ice Cream & Frozen', 'Combo deals on Juice packs', 'Free drink with ₹500+ purchase'],
-            validity: 'April – June'
-        },
-        school: {
-            title: 'Back To School Offers', badge: 'SCHOOL SEASON',
-            bg: 'linear-gradient(135deg,#4A148C,#9C27B0)',
-            desc: 'Get your kids school-ready with special prices on stationery and snacks.',
-            highlights: ['Flat 20% off on stationery', 'Special prices on health drinks', 'Snack combo packs for tiffins', 'Discounted school accessories'],
-            validity: 'June & July'
-        }
+        weekend: { title: 'Weekend Savings Festival', badge: 'SAT & SUN ONLY', bg: 'linear-gradient(135deg,#FF8F00,#FFB300)', desc: 'Make your weekends extra special! Enjoy massive discounts on fresh produce, dairy, and household essentials.', highlights: ['Up to 20% off Fresh Fruits & Vegetables', 'Buy 2 Get 1 Free on Dairy Products', 'Special discounts on Bakery Items', '10% off on all Cleaning Products'], validity: 'Every Saturday & Sunday' },
+        festival: { title: 'Grand Festival Offers', badge: 'FESTIVE SEASON', bg: 'linear-gradient(135deg,#C62828,#E53935)', desc: 'Celebrate the festive season with big savings on sweets, grocery bundles, and gift hampers.', highlights: ['Exclusive Festival Gift Hampers', 'Discounts on Mithai & sweets', '15% off on bulk grocery purchases', 'Combo offers on packaged foods'], validity: 'During all major festive seasons' },
+        monthly: { title: 'Monthly Mega Deals', badge: 'EVERY MONTH', bg: 'linear-gradient(135deg,#1565C0,#42A5F5)', desc: 'Stock up for the entire month at unbeatable prices.', highlights: ['Up to 30% off on bulk staples', 'Special prices on branded rice & dal', 'Discounted household bundles', 'Monthly loyalty bonus points'], validity: 'First week of every month' },
+        family: { title: 'Family Combo Promotions', badge: 'FAMILY PACKS', bg: 'linear-gradient(135deg,#2E7D32,#66BB6A)', desc: 'Save big on family-sized packs and reduce your monthly grocery bill.', highlights: ['Family pack combos across categories', 'Cereal + Milk combo at special price', 'Household bundle deals', 'Extra 5% off with loyalty card'], validity: 'All month long' },
+        summer: { title: 'Summer Savings', badge: 'SUMMER SPECIAL', bg: 'linear-gradient(135deg,#00838F,#26C6DA)', desc: 'Beat the Chennai heat with cool deals on beverages, juices, and frozen foods.', highlights: ['Up to 25% off on all beverages', 'Special prices on Ice Cream & Frozen', 'Juice combo packs', 'Free drink with ₹500+ purchase'], validity: 'April – June' },
+        school: { title: 'Back To School Offers', badge: 'SCHOOL SEASON', bg: 'linear-gradient(135deg,#4A148C,#9C27B0)', desc: 'Get your kids school-ready with special prices on stationery, snacks, and health drinks.', highlights: ['Flat 20% off on stationery', 'Special prices on health drinks', 'Snack combo packs for tiffins', 'Discounted school accessories'], validity: 'June & July' }
     };
 
     // ═══════════════════════════════════════════════════════
@@ -404,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('deptModalDesc').textContent = d.desc;
         document.getElementById('deptModalBrands').innerHTML = d.brands.map(b => `<span class="modal-brand-tag">${b}</span>`).join('');
         document.getElementById('deptModalProducts').innerHTML = d.products.map(p =>
-            `<div class="product-item"><img src="${p.img}" alt="${p.name}" loading="lazy"><div class="product-item-info"><h4>${p.name}</h4><p>${p.desc}</p></div></div>`
+            `<div class="product-item"><img src="${p.img}" alt="${p.name}"><div class="product-item-info"><h4>${p.name}</h4><p>${p.desc}</p></div></div>`
         ).join('');
         document.getElementById('deptModal').classList.add('open');
         body.classList.add('locked');
@@ -415,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('brandHeaderBlock').innerHTML = `<div class="brand-logo-xl" style="background:${b.color}">${b.title.slice(0,2)}</div><h2>${b.title}</h2>`;
         document.getElementById('brandDesc').textContent = b.desc;
         document.getElementById('brandProducts').innerHTML = b.products.map(p =>
-            `<div class="product-item"><img src="${p.img}" alt="${p.name}" loading="lazy"><div class="product-item-info"><h4>${p.name}</h4><p>${p.desc}</p></div></div>`
+            `<div class="product-item"><img src="${p.img}" alt="${p.name}"><div class="product-item-info"><h4>${p.name}</h4><p>${p.desc}</p></div></div>`
         ).join('');
         document.getElementById('brandModal').classList.add('open');
         body.classList.add('locked');
