@@ -327,61 +327,8 @@
                 <h2 data-i18n-key="offersHeader">In-Store Promotions</h2>
                 <p>Exclusive deals and offers — visit FreshMart to avail them.</p>
             </div>
-            <div class="offers-grid">
-                <div class="offer-card anim" data-offer="weekend"
-                    style="background:linear-gradient(135deg,#FF8F00,#FFB300)">
-                    <div class="offer-gradient"></div>
-                    <div class="offer-body"><span class="offer-badge">SAT &amp; SUN</span>
-                        <h3>Weekend Savings</h3>
-                        <p>Up to 20% off on fresh produce &amp; household essentials</p><span class="offer-cta">View
-                            Details <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <div class="offer-card anim" data-offer="festival"
-                    style="background:linear-gradient(135deg,#C62828,#E53935)">
-                    <div class="offer-gradient"></div>
-                    <div class="offer-body"><span class="offer-badge">FESTIVAL</span>
-                        <h3>Festival Special</h3>
-                        <p>Celebrate with big savings on sweets &amp; grocery bundles</p><span class="offer-cta">View
-                            Details <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <div class="offer-card anim" data-offer="monthly"
-                    style="background:linear-gradient(135deg,#1565C0,#42A5F5)">
-                    <div class="offer-gradient"></div>
-                    <div class="offer-body"><span class="offer-badge">MONTHLY</span>
-                        <h3>Monthly Mega Deals</h3>
-                        <p>Bulk savings on staples, grains and branded products</p><span class="offer-cta">View Details
-                            <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <div class="offer-card anim" data-offer="family"
-                    style="background:linear-gradient(135deg,#2E7D32,#66BB6A)">
-                    <div class="offer-gradient"></div>
-                    <div class="offer-body"><span class="offer-badge">FAMILY</span>
-                        <h3>Family Combo Deals</h3>
-                        <p>Buy more, save more on family-pack combos</p><span class="offer-cta">View Details <i
-                                class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <div class="offer-card anim" data-offer="summer"
-                    style="background:linear-gradient(135deg,#00838F,#26C6DA)">
-                    <div class="offer-gradient"></div>
-                    <div class="offer-body"><span class="offer-badge">SUMMER</span>
-                        <h3>Summer Savings</h3>
-                        <p>Cool deals on juices, beverages &amp; frozen foods</p><span class="offer-cta">View Details <i
-                                class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <div class="offer-card anim" data-offer="school"
-                    style="background:linear-gradient(135deg,#4A148C,#9C27B0)">
-                    <div class="offer-gradient"></div>
-                    <div class="offer-body"><span class="offer-badge">BACK TO SCHOOL</span>
-                        <h3>Back To School</h3>
-                        <p>Special prices on stationery, snacks &amp; packed foods</p><span class="offer-cta">View
-                            Details <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
+            <div class="offers-grid" id="offersGrid">
+                <!-- Dynamically generated in script.js -->
             </div>
         </div>
     </section>
@@ -449,46 +396,54 @@
                 <p>Click any image for a closer look.</p>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item anim" data-img="assets/images/about_store.png"
-                    data-caption="FreshMart Store Front"><img src="assets/images/about_store.png" alt="Store Front">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Store Front</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_exterior.png"
+                    data-caption="FreshMart Store Exterior &amp; Ample Parking"><img src="assets/images/gallery_exterior.png" alt="Store Exterior">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Store Exterior</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/fruits.png" data-caption="Fresh Fruits Section">
-                    <img src="assets/images/fruits.png" alt="Fruits Section">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Fresh Fruits</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_entrance.png" data-caption="Welcoming Store Entrance">
+                    <img src="assets/images/gallery_entrance.png" alt="Store Entrance">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Store Entrance</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/vegetables.png"
-                    data-caption="Vegetables Section"><img src="assets/images/vegetables.png" alt="Vegetables">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Vegetables</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_fruits.png"
+                    data-caption="Fresh Fruits Display"><img src="assets/images/gallery_fruits.png" alt="Fruits Section">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Fruits Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/grocery.png" data-caption="Grocery Shelves"><img
-                        src="assets/images/grocery.png" alt="Grocery Shelves">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Grocery Shelves</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_vegetables.png" data-caption="Fresh Vegetables Section"><img
+                        src="assets/images/gallery_vegetables.png" alt="Vegetables Section">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Vegetables Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/dairy.png" data-caption="Dairy Section"><img
-                        src="assets/images/dairy.png" alt="Dairy Section">
+                <div class="gallery-item anim" data-img="assets/images/gallery_grocery.png" data-caption="Well-Stocked Grocery Aisles"><img
+                        src="assets/images/gallery_grocery.png" alt="Grocery Aisles">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Grocery Aisles</span></div>
+                </div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_dairy.png" data-caption="Dairy &amp; Chilled Products Section"><img
+                        src="assets/images/gallery_dairy.png" alt="Dairy Section">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Dairy Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/bakery.png" data-caption="Fresh Bakery"><img
-                        src="assets/images/bakery.png" alt="Bakery">
+                <div class="gallery-item anim" data-img="assets/images/gallery_bakery.png"
+                    data-caption="In-Store Fresh Bakery"><img src="assets/images/gallery_bakery.png"
+                        alt="Bakery Section">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Bakery Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/store_interior.png"
-                    data-caption="Spacious Shopping Area"><img src="assets/images/store_interior.png"
-                        alt="Shopping Area">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Shopping Area</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_billing.png" data-caption="Fast Checkout &amp; Billing Counters">
+                    <img src="assets/images/gallery_billing.png" alt="Billing Counter">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Billing Counter</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/snacks.png" data-caption="Snacks & Beverages">
-                    <img src="assets/images/snacks.png" alt="Snacks">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Snacks Display</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_staff.png" data-caption="Customer Service &amp; Staff Assistance">
+                    <img src="assets/images/gallery_staff.png" alt="Staff Assistance">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Staff Assistance</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/kitchen.png" data-caption="Kitchen Essentials">
-                    <img src="assets/images/kitchen.png" alt="Kitchen">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Kitchen Section</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_baskets.png"
+                    data-caption="Sanitized Shopping Baskets &amp; Trolleys"><img src="assets/images/gallery_baskets.png" alt="Shopping Baskets">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Shopping Baskets</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/personal_care.png"
-                    data-caption="Personal Care Display"><img src="assets/images/personal_care.png" alt="Personal Care">
-                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Personal Care</span></div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_festival.png"
+                    data-caption="Festive Store Decorations"><img src="assets/images/gallery_festival.png" alt="Festival Decorations">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Festival Decorations</span></div>
+                </div>
+                <div class="gallery-item anim" data-img="assets/images/gallery_promo.png"
+                    data-caption="Weekly Special Promotion Display"><img src="assets/images/gallery_promo.png" alt="Weekly Promotions">
+                    <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Weekly Promotions</span></div>
                 </div>
             </div>
         </div>
@@ -513,9 +468,7 @@
             <div class="reviews-slider-wrapper">
                 <div class="reviews-track" id="reviewsTrack">
                     <div class="review-card">
-                        <div class="review-top"><img
-                                src="https://ui-avatars.com/api/?name=Priya+Sharma&background=2E7D32&color=fff&size=80&bold=true&rounded=true"
-                                alt="PS">
+                        <div class="review-top"><img src="assets/images/review_priya.png" alt="Priya Sharma">
                             <div>
                                 <h5>Priya Sharma</h5><span><i class="fas fa-map-marker-alt"></i> Chennai</span>
                                 <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -528,9 +481,7 @@
                         <div class="review-date">June 2026</div>
                     </div>
                     <div class="review-card">
-                        <div class="review-top"><img
-                                src="https://ui-avatars.com/api/?name=Arun+Kumar&background=1565C0&color=fff&size=80&bold=true&rounded=true"
-                                alt="AK">
+                        <div class="review-top"><img src="assets/images/review_arun.png" alt="Arun Kumar">
                             <div>
                                 <h5>Arun Kumar</h5><span><i class="fas fa-map-marker-alt"></i> Anna Nagar</span>
                                 <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -543,9 +494,7 @@
                         <div class="review-date">May 2026</div>
                     </div>
                     <div class="review-card">
-                        <div class="review-top"><img
-                                src="https://ui-avatars.com/api/?name=Divya+Lakshmi&background=E53935&color=fff&size=80&bold=true&rounded=true"
-                                alt="DL">
+                        <div class="review-top"><img src="assets/images/review_divya.png" alt="Divya Lakshmi">
                             <div>
                                 <h5>Divya Lakshmi</h5><span><i class="fas fa-map-marker-alt"></i> Velachery</span>
                                 <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -558,9 +507,7 @@
                         <div class="review-date">May 2026</div>
                     </div>
                     <div class="review-card">
-                        <div class="review-top"><img
-                                src="https://ui-avatars.com/api/?name=Ramesh+Kumar&background=FF8F00&color=fff&size=80&bold=true&rounded=true"
-                                alt="RK">
+                        <div class="review-top"><img src="assets/images/review_ramesh.png" alt="Ramesh Kumar">
                             <div>
                                 <h5>Ramesh Kumar</h5><span><i class="fas fa-map-marker-alt"></i> T Nagar</span>
                                 <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -573,9 +520,7 @@
                         <div class="review-date">April 2026</div>
                     </div>
                     <div class="review-card">
-                        <div class="review-top"><img
-                                src="https://ui-avatars.com/api/?name=Karthik+Raj&background=6A1B9A&color=fff&size=80&bold=true&rounded=true"
-                                alt="KR">
+                        <div class="review-top"><img src="assets/images/review_karthik.png" alt="Karthik Raj">
                             <div>
                                 <h5>Karthik Raj</h5><span><i class="fas fa-map-marker-alt"></i> Adyar</span>
                                 <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -738,9 +683,20 @@
                 </div>
             </div>
             <div class="modal-scroll-body">
-                <p id="offerModalDesc" class="modal-lead"></p>
-                <div class="modal-sec-title">Offer Highlights</div>
-                <ul class="offer-highlights-list" id="offerHighlights"></ul>
+                <div class="offer-modal-layout">
+                    <img id="offerModalImg" class="offer-modal-img" src="" alt="Offer Image">
+                    <div class="offer-modal-info">
+                        <p id="offerModalDesc" class="modal-lead"></p>
+                        <div class="modal-sec-title">Offer Highlights</div>
+                        <ul class="offer-highlights-list" id="offerHighlights"></ul>
+                    </div>
+                </div>
+                
+                <button id="offerTermsBtn" class="btn btn-outline-terms"><i class="fas fa-file-contract"></i> View Terms &amp; Conditions</button>
+                <div id="offerTermsContent" class="offer-terms-content">
+                    <ul id="offerTermsList" class="offer-terms-list"></ul>
+                </div>
+
                 <div class="terms-box"><strong><i class="fas fa-calendar-alt"></i> Validity:</strong> <span
                         id="offerValidity"></span><br><strong><i class="fas fa-store"></i> Available At:</strong> All
                     FreshMart branches</div>

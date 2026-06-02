@@ -288,6 +288,91 @@ section{padding:90px 0}
 .scroll-top{position:fixed;bottom:30px;right:28px;width:50px;height:50px;border-radius:50%;background:var(--text);color:#fff;border:none;font-size:1.1rem;cursor:pointer;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:var(--trans);z-index:800}
 .scroll-top.show{opacity:1;pointer-events:auto}.scroll-top:hover{background:var(--green)}
 
+/* ── OFFER MODAL EXTENSIONS ── */
+.offer-modal-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+.offer-modal-img {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+}
+.offer-modal-info {
+    flex: 1;
+}
+.btn-outline-terms {
+    background: transparent;
+    border: 1.5px solid var(--green);
+    color: var(--green);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 9px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    margin: 10px 0 16px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--trans);
+}
+.btn-outline-terms:hover {
+    background: var(--green);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.15);
+}
+.offer-terms-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease, margin 0.3s ease;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 0 16px;
+}
+.offer-terms-content.open {
+    max-height: 250px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px dashed var(--green-light);
+}
+.offer-terms-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.offer-terms-list li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+.offer-terms-list li i {
+    color: var(--red);
+    font-size: 0.75rem;
+}
+@media (max-width: 550px) {
+    .offer-modal-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .offer-modal-img {
+        width: 100%;
+        max-width: 220px;
+        height: 160px;
+    }
+}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1100px){.about-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.contact-grid,.footer-grid{grid-template-columns:1fr 1fr}}
