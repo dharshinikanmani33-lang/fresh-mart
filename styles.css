@@ -19,6 +19,9 @@ body.locked{overflow:hidden}
 .container{max-width:1240px;margin:0 auto;padding:0 20px}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
+/* Broken image fallback: If img fails, show a clean colored box */
+img[alt]::after{content:attr(alt);display:flex;align-items:center;justify-content:center;position:absolute;inset:0;background:var(--bg);color:var(--muted);font-size:.85rem;font-weight:600;text-align:center;padding:10px}
+img{position:relative;background:var(--bg);min-height:40px}
 
 /* ── Buttons ── */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-sm);font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:var(--trans)}
