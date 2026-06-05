@@ -714,6 +714,225 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ═══════════════════════════════════════════════════════
+    // MULTILINGUAL EXTENDED SHOWROOM & BRAND DATA
+    // ═══════════════════════════════════════════════════════
+    const deptHighlightsData = {
+        fruits: {
+            en: ['100% Organic Sourced', 'Chilled Chain Delivery', 'Zero Preservatives', 'Restocked at 5 AM Daily'],
+            ta: ['100% இயற்கையானது', 'குளிர் சங்கிலி விநியோகம்', 'பாதுகாப்பு பொருட்கள் இல்லை', 'தினமும் காலை 5 மணிக்கு புதியது']
+        },
+        vegetables: {
+            en: ['Sourced from Local Farms', 'Fresh Stock Every Morning', 'Crisp & Nutritious', 'Hygiene Grade Packed'],
+            ta: ['உள்ளூர் பண்ணைகளிலிருந்து பெறப்பட்டது', 'தினமும் புதிய பங்குகள்', 'சத்தானது', 'சுகாதாரமாக பேக் செய்யப்பட்டது']
+        },
+        grocery: {
+            en: ['Premium Grade Staples', 'Adulteration Free', 'Best Market Rates', 'Hygienically Packed'],
+            ta: ['பிரீமியம் தர உணவுப் பொருட்கள்', 'கலப்படம் இல்லாதது', 'சிறந்த சந்தை விலைகள்', 'சுகாதாரமாக பேக் செய்யப்பட்டது']
+        },
+        rice: {
+            en: ['Aged Premium Grains', 'Sorted and Cleaned', 'Top Brand Selection', 'No Broken Kernels'],
+            ta: ['பழமையான பிரீமியம் தானியங்கள்', 'சுத்தம் செய்யப்பட்டது', 'சிறந்த பிராண்ட் தேர்வுகள்', 'உடைந்த அரிசிகள் இல்லை']
+        },
+        dairy: {
+            en: ['Cold Chain Maintained', 'Strict Quality Checks', '100% Pure & Fresh', 'Zero Adulterants'],
+            ta: ['குளிர் சங்கிலி பராமரிக்கப்படுகிறது', 'கடுமையான தர சோதனைகள்', '100% தூய்மையான & புதியது', 'கலப்படம் இல்லாதது']
+        },
+        bakery: {
+            en: ['In-Store Baked Daily', 'Zero Artificial Preservatives', 'Soft & Melt-in-Mouth', 'Hand-Crafted Chefs'],
+            ta: ['தினமும் சுடப்படுகிறது', 'செயற்கை பாதுகாப்பு இல்லை', 'மென்மையானது', 'கைவினைஞர்களால் தயாரிக்கப்பட்டது']
+        },
+        snacks: {
+            en: ['Popular Brands Stocked', 'Perfect Party Combos', 'Fresh Stock Weekly', 'Wide Variety Range'],
+            ta: ['பிரபலமான பிராண்டுகள்', 'சிறந்த காம்போக்கள்', 'வாராந்திர புதிய பங்குகள்', 'பரந்த அளவிலான தேர்வுகள்']
+        },
+        frozen: {
+            en: ['Sub-Zero Temperature Storage', 'Preserved Freshness', 'Instant Food Selection', 'Safe Sealed Packs'],
+            ta: ['துணை பூஜ்ஜிய வெப்பநிலை சேமிப்பு', 'பாதுகாக்கப்பட்ட புதிய தன்மை', 'உடனடி உணவு தேர்வுகள்', 'பாதுகாப்பாக சீல் செய்யப்பட்டது']
+        },
+        personal: {
+            en: ['Top Quality Brands', 'Dermatologist Recommended', 'Gentle & Safe Care', '100% Original Brands'],
+            ta: ['உயர் தர பிராண்டுகள்', 'சருமத்திற்கு பாதுகாப்பானது', 'மென்மையான பராமரிப்பு', '100% அசல் பிராண்டுகள்']
+        },
+        baby: {
+            en: ['Pediatrician Approved Brands', 'Ultra Gentle & Safe', 'Premium Quality Care', 'Soft Fabrics Safe'],
+            ta: ['மருத்துவர் அங்கீகரித்த பிராண்டுகள்', 'மென்மையானது & பாதுகாப்பானது', 'பிரீமியம் தர பராமரிப்பு', 'மென்மையான துணிகளுக்கு பாதுகாப்பானது']
+        },
+        household: {
+            en: ['Durable Quality Tools', 'BPA Free Storage Containers', 'Modern Home Utilities', 'Best Utility Value'],
+            ta: ['நீடித்த தரமான கருவிகள்', 'BPA இல்லாத சேமிப்பு கொள்கலன்கள்', 'நவீன வீட்டு உபகரணங்கள்', 'சிறந்த வீட்டு மதிப்பு']
+        },
+        cleaning: {
+            en: ['Tough on Grease & Dirt', 'Eco-Friendly Options', 'Long-Lasting Fragrances', 'Disinfectant Formula'],
+            ta: ['அழுக்குகளை நீக்கும்', 'சுற்றுச்சூழல் நட்பு விருப்பங்கள்', 'நீண்ட கால வாசனை', 'கிருமிநாசினி சூத்திரம்']
+        },
+        kitchen: {
+            en: ['IS-Certified Cookware', 'Ergonomic Premium Handles', 'Heavy Gauge Steel', 'Non-Stick Long Life'],
+            ta: ['IS-சான்றளிக்கப்பட்ட பாத்திரங்கள்', 'பிரீமியம் கைப்பிடிகள்', 'கனரக எஃகு', 'ஒட்டாத நீண்ட ஆயுள்']
+        },
+        stationery: {
+            en: ['Fine Writing Quality Papers', 'Complete School Supplies', 'Non-Toxic Pens', 'Top Brand Stationery'],
+            ta: ['சிறந்த எழுத்து தரம்', 'முழுமையான பள்ளி பொருட்கள்', 'பாதுகாப்பான பேனாக்கள்', 'சிறந்த பிராண்ட் எழுதுபொருட்கள்']
+        },
+        petcare: {
+            en: ['High Protein Food Brands', 'Nutritious & Digestion Safe', 'Recommended by Vets', 'Balanced Diet Formula'],
+            ta: ['அதிக புரத உணவுகள்', 'செரிமானத்திற்கு பாதுகாப்பானது', 'கால்நடை மருத்துவர்களால் பரிந்துரைக்கப்பட்டது', 'சீரான உணவு சூத்திரம்']
+        }
+    };
+
+    const brandExtData = {
+        amul: {
+            history: {
+                en: "Established in 1946 in Anand, Gujarat, Amul triggered India's White Revolution, making the country the world's largest milk producer. It is the gold standard of dairy cooperative systems.",
+                ta: "1946 இல் குஜராத்தின் ஆனந்தில் தொடங்கப்பட்ட அமுல், இந்தியாவின் வெண்மைப் புரட்சியைத் தூண்டி, நாட்டின் பால் உற்பத்தியை உலகளவில் முதலிடத்திற்கு கொண்டு வந்தது. இது பால் கூட்டுறவு அமைப்புகளின் தரம் ஆகும்."
+            },
+            trust: {
+                en: ["100% Purity Guaranteed", "Farmer-Owned Cooperative", "No Artificial Preservatives"],
+                ta: ["100% தூய்மை உத்தரவாதம்", "விவசாயிகளுக்கு சொந்தமான கூட்டுறவு", "செயற்கை பாதுகாப்பு பொருட்கள் இல்லை"]
+            }
+        },
+        tata: {
+            history: {
+                en: "Tata Sampann offers premium pulses and spices that are unpolished and sourced directly from select farms across India. It focuses on offering natural products that preserve nutrients.",
+                ta: "டாடா சம்பன் பிரீமியம் பருப்புகள் மற்றும் மசாலாப் பொருட்களை மெருகூட்டாமல், இந்தியாவின் தேர்ந்தெடுக்கப்பட்ட பண்ணைகளிலிருந்து நேரடியாக வழங்குகிறது. இது ஊட்டச்சத்துக்களை பாதுகாப்பதில் கவனம் செலுத்துகிறது."
+            },
+            trust: {
+                en: ["No Artificial Polish", "Naturally Sourced & Sorted", "Premium Sieve Graded"],
+                ta: ["செயற்கை மெருகூட்டல் இல்லை", "இயற்கையாகப் பெறப்பட்டு பிரிக்கப்பட்டது", "பிரீமியம் தரம்"]
+            }
+        },
+        aashirvaad: {
+            history: {
+                en: "Aashirvaad, launched by ITC in 2002, is India's leading flour brand. It uses a meticulous 3-step cleaning and grinding process to ensure that the flour makes soft and healthy rotis.",
+                ta: "2002 இல் ஐடிசி நிறுவனத்தால் தொடங்கப்பட்ட ஆசிர்வாத், இந்தியாவின் முன்னணி மாவு பிராண்ட் ஆகும். மாவு மென்மையான மற்றும் ஆரோக்கியமான ரொட்டிகளை தயாரிப்பதை உறுதி செய்ய 3-கட்ட சுத்தம் செய்யும் முறையைப் பயன்படுத்துகிறது."
+            },
+            trust: {
+                en: ["Carefully Chosen Grains", "Strict Hygiene Standards", "Rich in Natural Dietary Fiber"],
+                ta: ["கவனமாக தேர்ந்தெடுக்கப்பட்ட தானியங்கள்", "கடுமையான சுகாதார தரநிலைகள்", "இயற்கை நார்சத்து நிறைந்தது"]
+            }
+        },
+        britannia: {
+            history: {
+                en: "With a heritage of over 130 years, Britannia is one of India's favorite bakery brands. Britannia products have been a staple of Indian tea-times for generations.",
+                ta: "130 ஆண்டுகளுக்கும் மேலான பாரம்பரியத்தைக் கொண்ட பிரிட்டானியா, இந்தியாவின் மிகவும் விரும்பப்படும் பேக்கரி பிராண்டுகளில் ஒன்றாகும். பிரிட்டானியா தயாரிப்புகள் பல தலைமுறைகளாக இந்திய டீ-டைமின் முக்கிய அங்கமாகும்."
+            },
+            trust: {
+                en: ["Baked Daily Fresh", "Wholesome Good Ingredients", "Over 130 Years Legacy"],
+                ta: ["தினமும் புதியதாக சுடப்பட்டது", "ஆரோக்கியமான நல்ல பொருட்கள்", "130 ஆண்டுகளுக்கும் மேலான பாரம்பரியம்"]
+            }
+        },
+        parle: {
+            history: {
+                en: "Parle has been sweetening lives in India since 1929. The iconic Parle-G is the world's largest selling biscuit, bringing nourishment and glucose energy to kids.",
+                ta: "பார்லே 1929 முதல் இந்தியாவில் மக்களின் வாழ்க்கையை இனிமையாக்கி வருகிறது. புகழ்பெற்ற பார்லே-ஜி உலகின் மிகப்பெரிய அளவில் விற்பனையாகும் பிஸ்கட் ஆகும், இது குழந்தைகளுக்கு ஊட்டச்சத்தையும் குளுக்கோஸ் ஆற்றலையும் அளிக்கிறது."
+            },
+            trust: {
+                en: ["Generations of Love", "High-Energy Glucose", "Pocket-Friendly Quality"],
+                ta: ["தலைமுறைகளின் அன்பு", "அதிக ஆற்றல் கொண்ட குளுக்கோஸ்", "விலைக்கேற்ற தரம்"]
+            }
+        },
+        sunfeast: {
+            history: {
+                en: "ITC's Sunfeast brings delight with high-end, chocolate-filled cookies like Dark Fantasy. It is dedicated to bringing quality ingredients and rich flavors.",
+                ta: "ஐடிசியின் சன்ஃபீஸ்ட் டார்க் ஃபேண்டஸி போன்ற நவீன, பிரீமியம் மற்றும் சாக்லேட் நிரப்பப்பட்ட குக்கீகளை வழங்குகிறது. இது தரமான பொருட்கள் மற்றும் சிறந்த சுவைகளை வழங்க அர்ப்பணிக்கப்பட்டுள்ளது."
+            },
+            trust: {
+                en: ["Premium Rich Chocolate", "Superior Baking Quality", "Crisp & Delicious Textures"],
+                ta: ["பிரீமியம் சிறந்த சாக்லேட்", "சிறந்த பேக்கிங் தரம்", "மொறுமொறுப்பான மற்றும் சுவையான அமைப்பு"]
+            }
+        },
+        aavin: {
+            history: {
+                en: "Aavin milk is sourced directly from cooperative farmers across Tamil Nadu. It provides reliable livelihood to local farmers while ensuring high-quality milk reaches families daily.",
+                ta: "ஆவின் பால் தமிழகம் முழுவதும் உள்ள கூட்டுறவு விவசாயிகளிடமிருந்து நேரடியாகப் பெறப்படுகிறது. இது உள்ளூர் விவசாயிகளுக்கு வாழ்வாதாரத்தை வழங்கும் அதே வேளையில், தரமான பால் குடும்பங்களை சென்றடைவதை உறுதி செய்கிறது."
+            },
+            trust: {
+                en: ["Locally Sourced TN", "Daily Lab Tested Checks", "Supported Co-ops Farmers"],
+                ta: ["தமிழகத்திலிருந்து பெறப்பட்டது", "தினமும் ஆய்வக சோதனைகள்", "கூட்டுறவு விவசாயிகளுக்கு ஆதரவு"]
+            }
+        },
+        horlicks: {
+            history: {
+                en: "Horlicks has been a staple health drink in Indian households. Formulated with milk protein, vitamins, and minerals, it is a trusted choice for children's growth.",
+                ta: "ஹார்லிக்ஸ் இந்திய வீடுகளில் ஒரு முக்கிய ஆரோக்கிய பானமாக இருந்து வருகிறது. பால் புரதம், வைட்டமின்கள் மற்றும் தாதுக்களுடன் தயாரிக்கப்பட்ட இது, குழந்தைகளின் வளர்ச்சிக்கு நம்பகமான தேர்வாகும்."
+            },
+            trust: {
+                en: ["Clinically Proven Growth", "Essential Micronutrients", "Stronger Bones & Immunity"],
+                ta: ["வளர்ச்சி மருத்துவ ரீதியாக நிரூபிக்கப்பட்டது", "அத்தியாவசிய சத்துக்கள்", "வலுவான எலும்புகள் & நோய் எதிர்ப்பு சக்தி"]
+            }
+        },
+        surfexcel: {
+            history: {
+                en: "Surf Excel is a market leader in premium detergent products in India, famous for its stain-removing properties. It helps families remove tough stains with ease.",
+                ta: "சர்ஃப் எக்செல் இந்தியாவில் பிரீமியம் சோப்பு தயாரிப்புகளில் சந்தையில் முன்னணியில் உள்ளது, அதன் கறை நீக்கும் பண்புகளுக்கு பெயர் பெற்றது. இது கடினமான கறைகளை எளிதில் அகற்ற உதவுகிறது."
+            },
+            trust: {
+                en: ["Advanced Stain Removal", "Gentle on Colors & Fibers", "Most Trusted Detergent"],
+                ta: ["மேம்பட்ட கறை நீக்கம்", "வண்ணங்கள் & இழைகளுக்கு மென்மையானது", "மிகவும் நம்பகமான சலவை சோப்பு"]
+            }
+        },
+        vim: {
+            history: {
+                en: "Vim revolutionized dishwashing in India by introducing the first-ever dishwash bar. Formulated with the grease-cutting power of lemons, Vim makes kitchen cleanup quick.",
+                ta: "விம் பாத்திரம் கழுவும் சோப்பை அறிமுகப்படுத்தி இந்தியாவில் பாத்திரம் கழுவும் முறையில் புரட்சியை ஏற்படுத்தியது. எலுமிச்சையின் கொழுப்பை நீக்கும் சக்தியுடன் தயாரிக்கப்பட்ட விம், சமையலறை சுத்தம் செய்வதை எளிதாக்குகிறது."
+            },
+            trust: {
+                en: ["Real Lemon Juice Power", "Removes Tough Grease Easily", "Germ Removal Protection"],
+                ta: ["உண்மையான எலுமிச்சை சாறு சக்தி", "கடினமான கொழுப்பை எளிதில் நீக்குகிறது", "கிருமி நீக்க பாதுகாப்பு"]
+            }
+        }
+    };
+
+    // Helper to generate premium product HTML
+    const getProductCardHTML = (p, lang) => {
+        const name = p.name[lang] || p.name['en'];
+        const desc = p.desc[lang] || p.desc['en'];
+        
+        let badgeText = lang === 'en' ? 'Premium' : 'பிரீமியம்';
+        let detailsText = lang === 'en' ? 'Fresh Sourced' : 'புதியதாக பெறப்பட்டது';
+        let rating = (4.7 + (name.length % 4) * 0.1).toFixed(1);
+        let qty = (name.length % 2 === 0) ? '500g' : '1 kg';
+        
+        if (name.includes('Apple') || name.includes('Mango') || name.includes('Orange') || name.includes('Grapes') || name.includes('Banana') || name.includes('Pineapple') || name.includes('Pomegranate') || name.includes('Watermelon')) {
+            badgeText = lang === 'en' ? 'Organic' : 'இயற்கை';
+            detailsText = lang === 'en' ? 'Daily Sourced' : 'தினமும் பெறப்பட்டது';
+        } else if (name.includes('Tomato') || name.includes('Onion') || name.includes('Potato') || name.includes('Carrot') || name.includes('Beans') || name.includes('Brinjal') || name.includes('Cabbage') || name.includes('Cauliflower')) {
+            badgeText = lang === 'en' ? 'Farm Fresh' : 'பண்ணை புதியது';
+            detailsText = lang === 'en' ? 'Ooty Sourced' : 'ஊட்டியிலிருந்து பெறப்பட்டது';
+        } else if (name.includes('Milk') || name.includes('Butter') || name.includes('Cheese') || name.includes('Paneer') || name.includes('Curd')) {
+            badgeText = lang === 'en' ? '100% Pure' : '100% தூய்மையானது';
+            detailsText = lang === 'en' ? 'Cold Chain' : 'குளிர்விக்கப்பட்டது';
+            qty = '500ml / 200g';
+        } else if (name.includes('Bread') || name.includes('Cake') || name.includes('Bun') || name.includes('Cookie')) {
+            badgeText = lang === 'en' ? 'Freshly Baked' : 'புதியதாக சுடப்பட்டது';
+            detailsText = lang === 'en' ? 'Daily Batch' : 'தினசரி தயாரிப்பு';
+        }
+        
+        const waText = encodeURIComponent(`Hi FreshMart! I am interested in checking the store availability of "${p.name['en']}" at your Anna Nagar store. Could you please confirm if this is in stock?`);
+        const waLink = `https://wa.me/919876543210?text=${waText}`;
+        
+        return `
+            <div class="product-item">
+                <span class="product-badge">${badgeText}</span>
+                <div class="product-img-wrapper">
+                    <img src="${p.img}" alt="${name}" loading="lazy">
+                </div>
+                <div class="product-item-info">
+                    <div class="product-rating"><i class="fas fa-star"></i> ${rating}</div>
+                    <h4>${name}</h4>
+                    <p>${desc}</p>
+                    <div class="product-meta-row">
+                        <span class="product-qty"><i class="fas fa-balance-scale"></i> ${qty}</span>
+                        <span class="product-origin"><i class="fas fa-map-marker-alt"></i> ${detailsText}</span>
+                    </div>
+                    <a href="${waLink}" target="_blank" class="btn-check-avail">
+                        <i class="fab fa-whatsapp"></i> ${lang === 'en' ? 'Check Availability' : 'இருப்பு சரிபார்க்கவும்'}
+                    </a>
+                </div>
+            </div>
+        `;
+    };
+
+    // ═══════════════════════════════════════════════════════
     // OPEN MODAL FUNCTIONS
     // ═══════════════════════════════════════════════════════
     const openDeptModal = (key) => {
@@ -729,17 +948,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('deptModalDesc').textContent = descText;
         document.getElementById('deptModalBrands').innerHTML = d.brands.map(b => `<span class="modal-brand-tag">${b}</span>`).join('');
         
-        document.getElementById('deptModalProducts').innerHTML = d.products.map(p => {
-            const prodName = p.name[currentLang] || p.name['en'];
-            const prodDesc = p.desc[currentLang] || p.desc['en'];
-            return `<div class="product-item">
-                <img src="${p.img}" alt="${prodName}">
-                <div class="product-item-info">
-                    <h4>${prodName}</h4>
-                    <p>${prodDesc}</p>
-                </div>
-            </div>`;
-        }).join('');
+        // Populating department highlights list
+        const highlightsEl = document.getElementById('deptModalHighlights');
+        if (highlightsEl) {
+            const hList = deptHighlightsData[key] ? deptHighlightsData[key][currentLang] : [];
+            highlightsEl.innerHTML = hList.map(h => `<li><i class="fas fa-check-circle"></i> ${h}</li>`).join('');
+        }
+
+        // Populating product grid with premium card layouts
+        document.getElementById('deptModalProducts').innerHTML = d.products.map(p => getProductCardHTML(p, currentLang)).join('');
 
         document.getElementById('deptModal').classList.add('open');
         body.classList.add('locked');
@@ -750,25 +967,33 @@ document.addEventListener('DOMContentLoaded', () => {
         activeModalKey = key;
         const b = brandData[key]; if (!b) return;
 
-        const descText = b.desc[currentLang] || b.desc['en'];
-
+        // Custom logo circle header
         document.getElementById('brandHeaderBlock').innerHTML = `
             <div class="brand-logo-xl" style="background:${b.color}">${b.title.slice(0,2)}</div>
             <h2>${b.title}</h2>
         `;
+
+        // Brand history block
+        const ext = brandExtData[key];
+        const descText = ext ? ext.history[currentLang] : (b.desc[currentLang] || b.desc['en']);
         document.getElementById('brandDesc').textContent = descText;
         
-        document.getElementById('brandProducts').innerHTML = b.products.map(p => {
-            const prodName = p.name[currentLang] || p.name['en'];
-            const prodDesc = p.desc[currentLang] || p.desc['en'];
-            return `<div class="product-item">
-                <img src="${p.img}" alt="${prodName}">
-                <div class="product-item-info">
-                    <h4>${prodName}</h4>
-                    <p>${prodDesc}</p>
+        // Brand trust grid list
+        const trustEl = document.getElementById('brandTrustGrid');
+        if (trustEl && ext) {
+            const trustList = ext.trust[currentLang] || [];
+            trustEl.innerHTML = trustList.map(t => `
+                <div class="brand-trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>${t}</span>
                 </div>
-            </div>`;
-        }).join('');
+            `).join('');
+        } else if (trustEl) {
+            trustEl.innerHTML = '';
+        }
+
+        // Brand products available in-store
+        document.getElementById('brandProducts').innerHTML = b.products.map(p => getProductCardHTML(p, currentLang)).join('');
 
         document.getElementById('brandModal').classList.add('open');
         body.classList.add('locked');
@@ -801,6 +1026,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ).join('');
         
         document.getElementById('offerValidity').textContent = validityText;
+
+        // Custom prefilled claim link trigger
+        const offerClaimBtn = document.getElementById('offerClaimBtn');
+        if (offerClaimBtn) {
+            const waText = encodeURIComponent(`Hi FreshMart! I'd like to check out the details or claim the offer "${o.title['en']}" (${badgeText}) at your Anna Nagar store. Please assist me.`);
+            offerClaimBtn.href = `https://wa.me/919876543210?text=${waText}`;
+        }
 
         // Reset terms block
         const offerTermsContent = document.getElementById('offerTermsContent');
@@ -871,16 +1103,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ─── LIGHTBOX ───
+    // ─── GALLERY FILTERING & LIGHTBOX ───
+    const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = [...document.querySelectorAll('.gallery-item')];
     const lbOverlay = document.getElementById('lightbox');
     const lbImg     = document.getElementById('lbImg');
     const lbCap     = document.getElementById('lbCaption');
     let lbIdx = 0;
-    const openLb = (i) => { lbIdx = i; lbImg.src = galleryItems[i].dataset.img; lbCap.textContent = galleryItems[i].dataset.caption; lbOverlay.classList.add('open'); body.classList.add('locked'); };
-    galleryItems.forEach((item, i) => item.addEventListener('click', () => openLb(i)));
-    document.querySelector('.lb-prev').addEventListener('click', () => openLb((lbIdx - 1 + galleryItems.length) % galleryItems.length));
-    document.querySelector('.lb-next').addEventListener('click', () => openLb((lbIdx + 1) % galleryItems.length));
+    
+    // Track currently visible items for correct next/prev cycling
+    let visibleItems = [...galleryItems];
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            visibleItems = [];
+
+            galleryItems.forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.style.display = 'block';
+                    // Trigger reflow for animation
+                    void item.offsetWidth;
+                    item.classList.add('visible');
+                    visibleItems.push(item);
+                } else {
+                    item.style.display = 'none';
+                    item.classList.remove('visible');
+                }
+            });
+        });
+    });
+
+    const openLb = (i) => {
+        if (visibleItems.length === 0) return;
+        lbIdx = (i + visibleItems.length) % visibleItems.length;
+        lbImg.src = visibleItems[lbIdx].dataset.img;
+        lbCap.textContent = visibleItems[lbIdx].dataset.caption;
+        lbOverlay.classList.add('open');
+        body.classList.add('locked');
+    };
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const idx = visibleItems.indexOf(item);
+            if (idx !== -1) {
+                openLb(idx);
+            }
+        });
+    });
+
+    document.querySelector('.lb-prev').addEventListener('click', () => openLb(lbIdx - 1));
+    document.querySelector('.lb-next').addEventListener('click', () => openLb(lbIdx + 1));
 
     // ─── REVIEW SLIDER ───
     const track = document.getElementById('reviewsTrack');

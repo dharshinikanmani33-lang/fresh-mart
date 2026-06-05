@@ -61,17 +61,32 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-badge"><i class="fas fa-star"></i> Chennai's #1 Trusted Supermarket</div>
-            <h1 data-i18n-key="heroTitle">FreshMart Supermarket</h1>
-            <p data-i18n-key="heroDesc">Your Trusted Neighborhood Supermarket for Fresh Groceries, Daily Essentials, and
-                Everything Your Family Needs.</p>
-            <div class="hero-buttons">
-                <a href="#departments" class="btn btn-primary" data-i18n-key="heroBtnExplore"><i
-                        class="fas fa-th-large"></i> Explore Departments</a>
-                <a href="#offers" class="btn btn-secondary" data-i18n-key="heroBtnOffers"><i class="fas fa-tags"></i>
-                    Weekly Offers</a>
-                <a href="#contact" class="btn btn-glass" data-i18n-key="heroBtnContact"><i class="fas fa-phone"></i>
-                    Contact Us</a>
+            <div class="hero-badge hero-fade-in"><i class="fas fa-star"></i> Chennai's #1 Trusted Supermarket</div>
+            <h1 class="hero-title-anim" data-i18n-key="heroTitle">FreshMart Supermarket</h1>
+            <p class="hero-desc-anim" data-i18n-key="heroDesc">Your Trusted Neighborhood Supermarket for Fresh Groceries, Daily Essentials, and Everything Your Family Needs.</p>
+            <div class="hero-buttons hero-btn-anim">
+                <a href="#departments" class="btn btn-primary" data-i18n-key="heroBtnExplore"><i class="fas fa-th-large"></i> Explore Departments</a>
+                <a href="#offers" class="btn btn-secondary" data-i18n-key="heroBtnOffers"><i class="fas fa-tags"></i> Weekly Offers</a>
+                <a href="#contact" class="btn btn-glass" data-i18n-key="heroBtnContact"><i class="fas fa-phone"></i> Contact Us</a>
+            </div>
+            <!-- Statistics overlay -->
+            <div class="hero-stats-panel hero-stats-anim">
+                <div class="hero-stat-card">
+                    <div class="stat-num-row"><i class="fas fa-users"></i> 10,000+</div>
+                    <div class="stat-lbl" data-i18n-key="heroStatCustomers">Happy Customers</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="stat-num-row"><i class="fas fa-award"></i> 500+</div>
+                    <div class="stat-lbl" data-i18n-key="heroStatBrands">Brands Available</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="stat-num-row"><i class="fas fa-leaf"></i> 100%</div>
+                    <div class="stat-lbl" data-i18n-key="heroStatFresh">Fresh Products Daily</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="stat-num-row"><i class="fas fa-handshake"></i> Since 2009</div>
+                    <div class="stat-lbl" data-i18n-key="heroStatTrusted">Trusted in Chennai</div>
+                </div>
             </div>
         </div>
         <div class="hero-dots">
@@ -391,57 +406,71 @@
     <section id="gallery" class="gallery-section">
         <div class="container">
             <div class="section-header anim">
-                <div class="section-eyebrow">Store Tour</div>
-                <h2>Explore Our Store</h2>
-                <p>Click any image for a closer look.</p>
+                <div class="section-eyebrow" data-i18n-key="galleryEyebrow">Store Tour</div>
+                <h2 data-i18n-key="galleryHeader">Explore Our Store</h2>
+                <p data-i18n-key="galleryDesc">Click any image for a closer look.</p>
             </div>
+
+            <!-- Category Filter Bar -->
+            <div class="gallery-filter-bar anim">
+                <button class="filter-btn active" data-filter="all" data-i18n-key="galleryFilterAll">All Sections</button>
+                <button class="filter-btn" data-filter="exterior" data-i18n-key="galleryFilterExterior">Store Exterior</button>
+                <button class="filter-btn" data-filter="fruits" data-i18n-key="galleryFilterFruits">Fruits Section</button>
+                <button class="filter-btn" data-filter="vegetables" data-i18n-key="galleryFilterVeg">Vegetables Section</button>
+                <button class="filter-btn" data-filter="grocery" data-i18n-key="galleryFilterGrocery">Grocery Shelves</button>
+                <button class="filter-btn" data-filter="dairy" data-i18n-key="galleryFilterDairy">Dairy Section</button>
+                <button class="filter-btn" data-filter="bakery" data-i18n-key="galleryFilterBakery">Bakery Section</button>
+                <button class="filter-btn" data-filter="experience" data-i18n-key="galleryFilterExperience">Customer Experience</button>
+                <button class="filter-btn" data-filter="festival" data-i18n-key="galleryFilterFestival">Festival Decorations</button>
+            </div>
+
             <div class="gallery-grid">
-                <div class="gallery-item anim" data-img="assets/images/gallery_exterior.png"
+                <div class="gallery-item anim" data-category="exterior" data-img="assets/images/gallery_exterior.png"
                     data-caption="FreshMart Store Exterior &amp; Ample Parking"><img src="assets/images/gallery_exterior.png" alt="Store Exterior">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Store Exterior</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_entrance.png" data-caption="Welcoming Store Entrance">
+                <div class="gallery-item anim" data-category="exterior" data-img="assets/images/gallery_entrance.png" data-caption="Welcoming Store Entrance">
                     <img src="assets/images/gallery_entrance.png" alt="Store Entrance">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Store Entrance</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_fruits.png"
+                <div class="gallery-item anim" data-category="fruits" data-img="assets/images/gallery_fruits.png"
                     data-caption="Fresh Fruits Display"><img src="assets/images/gallery_fruits.png" alt="Fruits Section">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Fruits Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_vegetables.png" data-caption="Fresh Vegetables Section"><img
+                <div class="gallery-item anim" data-category="vegetables" data-img="assets/images/gallery_vegetables.png" data-caption="Fresh Vegetables Section"><img
                         src="assets/images/gallery_vegetables.png" alt="Vegetables Section">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Vegetables Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_grocery.png" data-caption="Well-Stocked Grocery Aisles"><img
+                <div class="gallery-item anim" data-category="grocery" data-img="assets/images/gallery_grocery.png" data-caption="Well-Stocked Grocery Aisles"><img
                         src="assets/images/gallery_grocery.png" alt="Grocery Aisles">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Grocery Aisles</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_dairy.png" data-caption="Dairy &amp; Chilled Products Section"><img
+                <div class="gallery-item anim" data-category="dairy" data-img="assets/images/gallery_dairy.png" data-caption="Dairy &amp; Chilled Products Section"><img
                         src="assets/images/gallery_dairy.png" alt="Dairy Section">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Dairy Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_bakery.png"
+                <div class="gallery-item anim" data-category="bakery" data-img="assets/images/gallery_bakery.png"
                     data-caption="In-Store Fresh Bakery"><img src="assets/images/gallery_bakery.png"
                         alt="Bakery Section">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Bakery Section</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_billing.png" data-caption="Fast Checkout &amp; Billing Counters">
+                <div class="gallery-item anim" data-category="experience" data-img="assets/images/gallery_billing.png" data-caption="Fast Checkout &amp; Billing Counters">
                     <img src="assets/images/gallery_billing.png" alt="Billing Counter">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Billing Counter</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_staff.png" data-caption="Customer Service &amp; Staff Assistance">
+                <div class="gallery-item anim" data-category="experience" data-img="assets/images/gallery_staff.png" data-caption="Customer Service &amp; Staff Assistance">
                     <img src="assets/images/gallery_staff.png" alt="Staff Assistance">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Staff Assistance</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_baskets.png"
+                <div class="gallery-item anim" data-category="experience" data-img="assets/images/gallery_baskets.png"
                     data-caption="Sanitized Shopping Baskets &amp; Trolleys"><img src="assets/images/gallery_baskets.png" alt="Shopping Baskets">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Shopping Baskets</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_festival.png"
+                <div class="gallery-item anim" data-category="festival" data-img="assets/images/gallery_festival.png"
                     data-caption="Festive Store Decorations"><img src="assets/images/gallery_festival.png" alt="Festival Decorations">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Festival Decorations</span></div>
                 </div>
-                <div class="gallery-item anim" data-img="assets/images/gallery_promo.png"
+                <div class="gallery-item anim" data-category="experience" data-img="assets/images/gallery_promo.png"
                     data-caption="Weekly Special Promotion Display"><img src="assets/images/gallery_promo.png" alt="Weekly Promotions">
                     <div class="gallery-overlay"><i class="fas fa-expand-alt"></i><span>Weekly Promotions</span></div>
                 </div>
@@ -453,90 +482,106 @@
     <section class="reviews-section bg-light">
         <div class="container">
             <div class="section-header anim">
-                <div class="section-eyebrow">Customer Love</div>
-                <h2>What Our Shoppers Say</h2>
-                <div class="overall-rating anim">
-                    <span class="big-score">4.8</span>
-                    <div>
-                        <div class="star-row"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p>Based on 1,200+ reviews</p>
-                    </div>
-                </div>
+                <div class="section-eyebrow" data-i18n-key="reviewsEyebrow">Customer Love</div>
+                <h2 data-i18n-key="reviewsHeader">What Our Shoppers Say</h2>
             </div>
-            <div class="reviews-slider-wrapper">
-                <div class="reviews-track" id="reviewsTrack">
-                    <div class="review-card">
-                        <div class="review-top"><img src="assets/images/review_priya.png" alt="Priya Sharma">
-                            <div>
-                                <h5>Priya Sharma</h5><span><i class="fas fa-map-marker-alt"></i> Chennai</span>
-                                <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
+            <div class="reviews-split-grid anim">
+                <!-- Left panel: Rating statistics -->
+                <div class="reviews-stats-card">
+                    <div class="overall-rating-card">
+                        <span class="big-score">4.8</span>
+                        <div class="rating-stars-block">
+                            <div class="star-row"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <p data-i18n-key="reviewsTotalCount">Based on 1,200+ reviews</p>
                         </div>
-                        <p>"FreshMart is simply the best supermarket in Chennai. Always fresh, always clean, and the
-                            staff are incredibly helpful. My family shops here every week!"</p>
-                        <div class="review-date">June 2026</div>
                     </div>
-                    <div class="review-card">
-                        <div class="review-top"><img src="assets/images/review_arun.png" alt="Arun Kumar">
-                            <div>
-                                <h5>Arun Kumar</h5><span><i class="fas fa-map-marker-alt"></i> Anna Nagar</span>
-                                <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
+                    <div class="rating-bars-list">
+                        <div class="rating-bar-item">
+                            <span>5 <i class="fas fa-star"></i></span>
+                            <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 88%"></div></div>
+                            <span class="rating-bar-percent">88%</span>
                         </div>
-                        <p>"I've been shopping at FreshMart for 8 years. The vegetable section is outstanding — always
-                            fresh. Their weekend offers are unbeatable!"</p>
-                        <div class="review-date">May 2026</div>
+                        <div class="rating-bar-item">
+                            <span>4 <i class="fas fa-star"></i></span>
+                            <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 9%"></div></div>
+                            <span class="rating-bar-percent">9%</span>
+                        </div>
+                        <div class="rating-bar-item">
+                            <span>3 <i class="fas fa-star"></i></span>
+                            <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 2%"></div></div>
+                            <span class="rating-bar-percent">2%</span>
+                        </div>
+                        <div class="rating-bar-item">
+                            <span>2 <i class="fas fa-star"></i></span>
+                            <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 1%"></div></div>
+                            <span class="rating-bar-percent">1%</span>
+                        </div>
                     </div>
-                    <div class="review-card">
-                        <div class="review-top"><img src="assets/images/review_divya.png" alt="Divya Lakshmi">
-                            <div>
-                                <h5>Divya Lakshmi</h5><span><i class="fas fa-map-marker-alt"></i> Velachery</span>
-                                <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star-half-alt"></i></div>
-                            </div>
-                        </div>
-                        <p>"They have every brand I need under one roof. The store is spotless and billing is always
-                            fast. Highly recommended to all families!"</p>
-                        <div class="review-date">May 2026</div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-top"><img src="assets/images/review_ramesh.png" alt="Ramesh Kumar">
-                            <div>
-                                <h5>Ramesh Kumar</h5><span><i class="fas fa-map-marker-alt"></i> T Nagar</span>
-                                <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p>"The festival offers at FreshMart are fantastic! Got amazing deals during Deepavali. The
-                            entire experience is always pleasant."</p>
-                        <div class="review-date">April 2026</div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-top"><img src="assets/images/review_karthik.png" alt="Karthik Raj">
-                            <div>
-                                <h5>Karthik Raj</h5><span><i class="fas fa-map-marker-alt"></i> Adyar</span>
-                                <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p>"Best supermarket experience in Chennai, period. Ample parking, wide aisles, friendly staff,
-                            and top-quality products!"</p>
-                        <div class="review-date">June 2026</div>
+                    <div class="satisfaction-meter">
+                        <div class="sat-percent"><i class="fas fa-heart"></i> 98%</div>
+                        <div class="sat-label" data-i18n-key="reviewsSatLabel">Customer Satisfaction Rate</div>
                     </div>
                 </div>
-                <div class="slider-controls">
-                    <button class="slider-btn-ctrl" id="reviewPrev"><i class="fas fa-chevron-left"></i></button>
-                    <div class="slider-dots-row" id="reviewDots"></div>
-                    <button class="slider-btn-ctrl" id="reviewNext"><i class="fas fa-chevron-right"></i></button>
+
+                <!-- Right panel: Carousel -->
+                <div class="reviews-slider-wrapper">
+                    <div class="reviews-track" id="reviewsTrack">
+                        <div class="review-card">
+                            <div class="review-top"><img src="assets/images/review_priya.png" alt="Priya Sharma">
+                                <div>
+                                    <h5>Priya Sharma</h5><span><i class="fas fa-map-marker-alt"></i> Chennai</span>
+                                    <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                            <p>"FreshMart is simply the best supermarket in Chennai. Always fresh, always clean, and the staff are incredibly helpful. My family shops here every week!"</p>
+                            <div class="review-date">June 2026</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-top"><img src="assets/images/review_arun.png" alt="Arun Kumar">
+                                <div>
+                                    <h5>Arun Kumar</h5><span><i class="fas fa-map-marker-alt"></i> Anna Nagar</span>
+                                    <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                            <p>"I've been shopping at FreshMart for 8 years. The vegetable section is outstanding — always fresh. Their weekend offers are unbeatable!"</p>
+                            <div class="review-date">May 2026</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-top"><img src="assets/images/review_divya.png" alt="Divya Lakshmi">
+                                <div>
+                                    <h5>Divya Lakshmi</h5><span><i class="fas fa-map-marker-alt"></i> Velachery</span>
+                                    <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                                </div>
+                            </div>
+                            <p>"They have every brand I need under one roof. The store is spotless and billing is always fast. Highly recommended to all families!"</p>
+                            <div class="review-date">May 2026</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-top"><img src="assets/images/review_ramesh.png" alt="Ramesh Kumar">
+                                <div>
+                                    <h5>Ramesh Kumar</h5><span><i class="fas fa-map-marker-alt"></i> T Nagar</span>
+                                    <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                            <p>"The festival offers at FreshMart are fantastic! Got amazing deals during Deepavali. The entire experience is always pleasant."</p>
+                            <div class="review-date">April 2026</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-top"><img src="assets/images/review_karthik.png" alt="Karthik Raj">
+                                <div>
+                                    <h5>Karthik Raj</h5><span><i class="fas fa-map-marker-alt"></i> Adyar</span>
+                                    <div class="stars-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                            <p>"Best supermarket experience in Chennai, period. Ample parking, wide aisles, friendly staff, and top-quality products!"</p>
+                            <div class="review-date">June 2026</div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-btn-ctrl" id="reviewPrev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="slider-dots-row" id="reviewDots"></div>
+                        <button class="slider-btn-ctrl" id="reviewNext"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -546,24 +591,21 @@
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="section-header anim">
-                <div class="section-eyebrow">Find Us</div>
-                <h2>Visit FreshMart Today</h2>
+                <div class="section-eyebrow" data-i18n-key="contactEyebrow">Find Us</div>
+                <h2 data-i18n-key="contactHeader">Visit FreshMart Today</h2>
             </div>
             <div class="contact-grid">
                 <div class="contact-info anim">
                     <div class="contact-block"><i class="fas fa-map-marker-alt"></i>
                         <div>
-                            <h4>Store Address</h4>
-                            <p>FreshMart Supermarket<br>120 Anna Nagar Main Road<br>Chennai, Tamil Nadu 600040</p><a
-                                href="https://maps.google.com/?q=Anna+Nagar+Chennai" target="_blank"
-                                class="link-btn">Open Google Maps <i class="fas fa-external-link-alt"></i></a>
+                            <h4 data-i18n-key="contactAddrTitle">Store Address</h4>
+                            <p>FreshMart Supermarket<br>120 Anna Nagar Main Road<br>Chennai, Tamil Nadu 600040</p>
                         </div>
                     </div>
                     <div class="contact-block"><i class="fas fa-phone-alt"></i>
                         <div>
-                            <h4>Call Us</h4>
-                            <p>+91 9876543210</p><a href="tel:+919876543210" class="link-btn">Call Now <i
-                                    class="fas fa-phone"></i></a>
+                            <h4 data-i18n-key="contactCallTitle">Call Us</h4>
+                            <p>+91 9876543210</p>
                         </div>
                     </div>
                     <div class="contact-block"><i class="fas fa-envelope"></i>
@@ -575,22 +617,53 @@
                     <div class="contact-block"><i class="fab fa-whatsapp"></i>
                         <div>
                             <h4>WhatsApp</h4>
-                            <p>Chat directly with us</p><a href="https://wa.me/919876543210" target="_blank"
-                                class="link-btn whatsapp-btn">Open WhatsApp <i class="fab fa-whatsapp"></i></a>
+                            <p data-i18n-key="contactWhatsAppDesc">Chat directly with our team</p>
                         </div>
                     </div>
                     <div class="contact-block"><i class="fas fa-clock"></i>
                         <div>
-                            <h4>Store Hours</h4>
-                            <p>Monday – Sunday<br>7:00 AM – 10:00 PM<br><strong>Open All Days</strong></p>
+                            <h4 data-i18n-key="contactHoursTitle">Store Hours</h4>
+                            <p data-i18n-key="contactHoursDesc">Monday – Sunday<br>7:00 AM – 10:00 PM<br><strong>Open All Days</strong></p>
+                        </div>
+                    </div>
+                    <!-- Parking & Peak Hours Card -->
+                    <div class="contact-block"><i class="fas fa-parking"></i>
+                        <div>
+                            <h4 data-i18n-key="contactParkingTitle">Ample Parking Space</h4>
+                            <p data-i18n-key="contactParkingDesc">Covered 4-wheeler and 2-wheeler parking slots with free valet assistance for a hassle-free shopping experience.</p>
+                        </div>
+                    </div>
+                    <div class="contact-block"><i class="fas fa-chart-bar"></i>
+                        <div>
+                            <h4 data-i18n-key="contactPeakTitle">Peak Shopping Hours</h4>
+                            <!-- Peak Hours visual bar graph -->
+                            <div class="peak-hours-graph">
+                                <div class="peak-hour-bar"><span>7 AM</span><div class="peak-bar-track"><div class="peak-bar-fill" style="height: 30%"></div></div><span class="peak-status low">Low</span></div>
+                                <div class="peak-hour-bar"><span>11 AM</span><div class="peak-bar-track"><div class="peak-bar-fill" style="height: 70%"></div></div><span class="peak-status mid">Mid</span></div>
+                                <div class="peak-hour-bar"><span>5 PM</span><div class="peak-bar-track"><div class="peak-bar-fill" style="height: 95%"></div></div><span class="peak-status high">High</span></div>
+                                <div class="peak-hour-bar"><span>8 PM</span><div class="peak-bar-track"><div class="peak-bar-fill" style="height: 80%"></div></div><span class="peak-status high">High</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-block"><i class="fas fa-store-alt"></i>
+                        <div>
+                            <h4 data-i18n-key="contactBranchesTitle">Our Branches</h4>
+                            <p><strong>Anna Nagar (Main):</strong> 120 Anna Nagar Main Rd, Chennai 600040<br>
+                               <strong>Adyar (Express):</strong> 45 Gandhi Nagar 1st Main Rd, Chennai 600020</p>
                         </div>
                     </div>
                 </div>
-                <div class="map-frame anim">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31097.63882490484!2d80.20161!3d13.08555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264f6f32a8a37%3A0x4c86d0a20e5b73fd!2sAnna+Nagar%2C+Chennai%2C+Tamil+Nadu!5e0!3m2!1sen!2sin!4v1685000000000!5m2!1sen!2sin"
-                        width="100%" height="420" style="border:0;border-radius:12px;" allowfullscreen=""
-                        loading="lazy"></iframe>
+                <div class="map-container-block anim">
+                    <div class="map-frame">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31097.63882490484!2d80.20161!3d13.08555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264f6f32a8a37%3A0x4c86d0a20e5b73fd!2sAnna+Nagar%2C+Chennai%2C+Tamil+Nadu!5e0!3m2!1sen!2sin!4v1685000000000!5m2!1sen!2sin"
+                            width="100%" height="420" style="border:0;border-radius:12px;" allowfullscreen=""
+                            loading="lazy"></iframe>
+                    </div>
+                    <div class="map-actions-row">
+                        <a href="https://www.google.com/maps/search/?api=1&query=13.08555,80.20161" target="_blank" class="btn btn-primary"><i class="fas fa-map-marked-alt"></i> <span data-i18n-key="mapBtnOpen">Open in Google Maps</span></a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=13.08555,80.20161" target="_blank" class="btn btn-secondary"><i class="fas fa-directions"></i> <span data-i18n-key="mapBtnDirections">Get Directions</span></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -603,35 +676,49 @@
                 <div class="footer-grid">
                     <div class="footer-about">
                         <div class="footer-logo"><i class="fas fa-shopping-basket"></i> FreshMart</div>
-                        <p>Your Trusted Neighborhood Supermarket in Anna Nagar, Chennai. Providing quality, freshness,
-                            and value to 50,000+ families for over 15 years.</p>
-                        <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i
-                                    class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a
-                                href="https://wa.me/919876543210" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <p>Your Trusted Neighborhood Supermarket in Anna Nagar, Chennai. Providing quality, freshness, and value to 50,000+ families for over 15 years.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="https://wa.me/919876543210" target="_blank"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                     <div class="footer-col">
-                        <h4 data-i18n-key="footerQuickLinks">Quick Links</h4><a href="#home"
-                            data-i18n-key="footerHome">Home</a><a href="#about" data-i18n-key="footerAbout">About
-                            Us</a><a href="#departments" data-i18n-key="footerDepartments">Departments</a><a
-                            href="#brands">Brands</a><a href="#offers">Offers</a><a href="#gallery">Gallery</a><a
-                            href="#contact">Contact</a>
+                        <h4 data-i18n-key="footerQuickLinks">Quick Links</h4>
+                        <a href="#home" data-i18n-key="footerHome">Home</a>
+                        <a href="#about" data-i18n-key="footerAbout">About Us</a>
+                        <a href="#departments" data-i18n-key="footerDepartments">Departments</a>
+                        <a href="#brands">Brands</a>
+                        <a href="#offers">Offers</a>
+                        <a href="#gallery">Gallery</a>
+                        <a href="#contact">Contact</a>
                     </div>
                     <div class="footer-col">
-                        <h4>Departments</h4><a href="#departments">Fresh Fruits</a><a
-                            href="#departments">Vegetables</a><a href="#departments">Dairy</a><a
-                            href="#departments">Grocery</a><a href="#departments">Bakery</a><a
-                            href="#departments">Personal Care</a><a href="#departments">Baby Care</a>
+                        <h4 data-i18n-key="footerDepartments">Departments</h4>
+                        <a href="#departments">Fresh Fruits</a>
+                        <a href="#departments">Vegetables</a>
+                        <a href="#departments">Dairy Products</a>
+                        <a href="#departments">Grocery &amp; Staples</a>
+                        <a href="#departments">Bakery Section</a>
+                        <a href="#departments">Personal Care</a>
                     </div>
                     <div class="footer-col">
-                        <h4>Store Info</h4>
+                        <h4 data-i18n-key="footerFeaturedBrands">Featured Brands</h4>
+                        <a href="#brands">Amul Dairy</a>
+                        <a href="#brands">Tata Sampann</a>
+                        <a href="#brands">Aashirvaad</a>
+                        <a href="#brands">Britannia</a>
+                        <a href="#brands">Parle biscuits</a>
+                        <a href="#brands">Aavin Tamil Nadu</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4 data-i18n-key="contactHoursTitle">Store Timings</h4>
                         <p><i class="fas fa-map-marker-alt"></i> 120 Anna Nagar Main Rd, Chennai 600040</p>
                         <p><i class="fas fa-phone"></i> <a href="tel:+919876543210">+91 9876543210</a></p>
-                        <p><i class="fas fa-envelope"></i> <a
-                                href="mailto:support@freshmart.com">support@freshmart.com</a></p>
-                        <p><i class="fas fa-clock"></i> Mon–Sun: 7 AM – 10 PM</p><a
-                            href="https://maps.google.com/?q=Anna+Nagar+Chennai" target="_blank"
-                            class="footer-map-btn"><i class="fas fa-map-marked-alt"></i> Google Maps</a>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:support@freshmart.com">support@freshmart.com</a></p>
+                        <p><i class="fas fa-clock"></i> Mon–Sun: 7 AM – 10 PM</p>
+                        <a href="https://maps.google.com/?q=Anna+Nagar+Chennai" target="_blank" class="footer-map-btn"><i class="fas fa-map-marked-alt"></i> Google Maps</a>
                     </div>
                 </div>
             </div>
@@ -644,37 +731,53 @@
         </div>
     </footer>
 
-    <!-- Floating -->
-    <div class="fab-wrap"><a href="tel:+919876543210" class="fab call-fab"><i class="fas fa-phone-alt"></i></a><a
-            href="https://wa.me/919876543210" target="_blank" class="fab wa-fab"><i class="fab fa-whatsapp"></i></a>
+    <!-- Floating Dock -->
+    <div class="floating-dock">
+        <button id="scrollTop" class="dock-btn scroll-btn" title="Scroll to Top"><i class="fas fa-arrow-up"></i></button>
+        <a href="tel:+919876543210" class="dock-btn call-btn" title="Call Us"><i class="fas fa-phone-alt"></i></a>
+        <a href="https://wa.me/919876543210" target="_blank" class="dock-btn wa-btn" title="WhatsApp Chat"><i class="fab fa-whatsapp"></i></a>
     </div>
-    <button id="scrollTop" class="scroll-top"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Modals -->
     <div id="deptModal" class="modal-overlay">
         <div class="modal-box large"><button class="modal-close-btn"><i class="fas fa-times"></i></button>
-            <div class="dept-modal-banner" id="deptModalBanner"></div>
-            <div class="modal-scroll-body">
-                <h2 id="deptModalTitle"></h2>
-                <p id="deptModalDesc" class="modal-lead"></p>
-                <div class="modal-brands-row" id="deptModalBrands"></div>
-                <div class="modal-sec-title">Featured Products</div>
-                <div class="product-grid" id="deptModalProducts"></div>
-                <div class="modal-visit-note"><i class="fas fa-store"></i> Visit FreshMart to explore all products.
+            <div class="dept-modal-layout">
+                <div class="dept-modal-sidebar">
+                    <div class="dept-modal-banner" id="deptModalBanner"></div>
+                    <div class="dept-modal-highlights-box">
+                        <h4 data-i18n-key="modalHighlightsTitle">Department Highlights</h4>
+                        <ul id="deptModalHighlights" class="dept-highlights-list"></ul>
+                    </div>
+                </div>
+                <div class="modal-scroll-body">
+                    <h2 id="deptModalTitle"></h2>
+                    <p id="deptModalDesc" class="modal-lead"></p>
+                    <div class="modal-sec-title" data-i18n-key="modalBrandsTitle">Available Brands</div>
+                    <div class="modal-brands-row" id="deptModalBrands"></div>
+                    <div class="modal-sec-title" data-i18n-key="modalProductsTitle">Featured Showroom Products</div>
+                    <div class="product-grid" id="deptModalProducts"></div>
+                    <div class="modal-visit-note"><i class="fas fa-store"></i> <span data-i18n-key="modalVisitNote">Visit FreshMart Anna Nagar to purchase and explore our complete inventory.</span></div>
                 </div>
             </div>
         </div>
     </div>
+
     <div id="brandModal" class="modal-overlay">
         <div class="modal-box medium"><button class="modal-close-btn"><i class="fas fa-times"></i></button>
             <div class="modal-scroll-body">
                 <div class="brand-header-block" id="brandHeaderBlock"></div>
                 <p id="brandDesc" class="modal-lead"></p>
-                <div class="modal-sec-title">Products Available In-Store</div>
+                <!-- Brand trust section -->
+                <div class="brand-trust-section">
+                    <h4 data-i18n-key="brandWhyTrustTitle">Why Shoppers Trust This Brand</h4>
+                    <div class="brand-trust-grid" id="brandTrustGrid"></div>
+                </div>
+                <div class="modal-sec-title" data-i18n-key="brandProductsTitle">Featured Brand Products In-Store</div>
                 <div class="product-grid product-grid-sm" id="brandProducts"></div>
             </div>
         </div>
     </div>
+
     <div id="offerModal" class="modal-overlay">
         <div class="modal-box medium"><button class="modal-close-btn"><i class="fas fa-times"></i></button>
             <div class="offer-modal-banner" id="offerModalBanner">
@@ -687,19 +790,21 @@
                     <img id="offerModalImg" class="offer-modal-img" src="" alt="Offer Image">
                     <div class="offer-modal-info">
                         <p id="offerModalDesc" class="modal-lead"></p>
-                        <div class="modal-sec-title">Offer Highlights</div>
+                        <div class="modal-sec-title" data-i18n-key="offerHighlightsTitle">Offer Highlights</div>
                         <ul class="offer-highlights-list" id="offerHighlights"></ul>
                     </div>
                 </div>
-                
-                <button id="offerTermsBtn" class="btn btn-outline-terms"><i class="fas fa-file-contract"></i> View Terms &amp; Conditions</button>
+                <div class="offer-cta-row">
+                    <button id="offerTermsBtn" class="btn btn-outline-terms"><i class="fas fa-file-contract"></i> <span data-i18n-key="offerBtnTerms">View Terms &amp; Conditions</span></button>
+                    <a id="offerClaimBtn" href="" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> <span data-i18n-key="offerBtnClaim">Claim Offer on WhatsApp</span></a>
+                </div>
                 <div id="offerTermsContent" class="offer-terms-content">
                     <ul id="offerTermsList" class="offer-terms-list"></ul>
                 </div>
-
-                <div class="terms-box"><strong><i class="fas fa-calendar-alt"></i> Validity:</strong> <span
-                        id="offerValidity"></span><br><strong><i class="fas fa-store"></i> Available At:</strong> All
-                    FreshMart branches</div>
+                <div class="terms-box">
+                    <strong><i class="fas fa-calendar-alt"></i> <span data-i18n-key="offerLabelValidity">Validity:</span></strong> <span id="offerValidity"></span><br>
+                    <strong><i class="fas fa-store"></i> <span data-i18n-key="offerLabelAvailability">Available At:</span></strong> <span data-i18n-key="offerAvailabilityVal">All FreshMart branches (Anna Nagar)</span>
+                </div>
             </div>
         </div>
     </div>
